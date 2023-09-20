@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PacmanGame_WinForms_.Bonus" Collapsed="true">
+    <Position X="27" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAABAAAAKEAAACCAAAAAAAhIAAAAAAAAAQ=</HashCode>
+      <FileName>Bonuses\Bonus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.DoubleCoinBonus">
+    <Position X="22.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAABAIAAAACAAAAAAAgAAAAgAAAAAA=</HashCode>
+      <FileName>Bonuses\DoubleCoinBonus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.MinusLiveBonus">
+    <Position X="29.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAIAAAACAAAAAAAgAAAAgAAAAAA=</HashCode>
+      <FileName>Bonuses\MinusLiveBonus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.PlusCoinBonus">
+    <Position X="24.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAIAAAACAAAAAAAgAAAAgAAAAAA=</HashCode>
+      <FileName>Bonuses\PlusCoinBonus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.PlusLiveBonus">
+    <Position X="31.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAIAAAACAAAAAAAgAAAAgAAAAAA=</HashCode>
+      <FileName>Bonuses\PlusLiveBonus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Surprise">
+    <Position X="27" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAIAAAACAAAAAAAgAAAAgAAAAAA=</HashCode>
+      <FileName>Bonuses\Surprise.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Controller" Collapsed="true">
+    <Position X="32" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQSBAgAAAAGgAAgRAAQAggAAAAAKABAkAAAAQgAEBA=</HashCode>
+      <FileName>Controller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.DataBase" Collapsed="true">
+    <Position X="32" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAFABAAAQAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>DataBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Game" Collapsed="true">
+    <Position X="41.25" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>JA0L+QAEWGHFwBjABJGQiCACAggIACETUBIwCEAJxtA=</HashCode>
+      <FileName>Forms\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Help" Collapsed="true">
+    <Position X="41.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>cAAAIhAAACAAARAAAACAQAACEAAAAAAAQAAgAABAAAA=</HashCode>
+      <FileName>Forms\Help.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Menu" Collapsed="true">
+    <Position X="41.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAACEAQBAAACCAAAACAACAAAAAAAEACCAAAAA=</HashCode>
+      <FileName>Forms\Menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Settings" Collapsed="true">
+    <Position X="41.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAICAAAACAEAIAAAAEFAIAQAAgAI=</HashCode>
+      <FileName>Forms\Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.BasePoint">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAgAABYAQ=</HashCode>
+      <FileName>GameField\BasePoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Coin">
+    <Position X="6.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAQ=</HashCode>
+      <FileName>GameField\Coin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.EmptyPoint">
+    <Position X="11.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameField\EmptyPoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Energiser">
+    <Position X="4.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAIQQ=</HashCode>
+      <FileName>GameField\Energiser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Field" Collapsed="true">
+    <Position X="32.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAgAAAEAACAAAAQAAAAAgAAAAAAAAAAgAAgg=</HashCode>
+      <FileName>GameField\Field.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.SourceFile" Collapsed="true">
+    <Position X="32" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAIAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameField\SourceFile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Wall">
+    <Position X="9" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameField\Wall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Blinky">
+    <Position X="20.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAABAAAAKQBAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ghosts\Blinky.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Clyde">
+    <Position X="18" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAAAAABAAAAKQBAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ghosts\Clyde.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Ghost">
+    <Position X="22.25" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EAREAFAAAIAYRAQBALITAAAABBQAAiQAgAAQgAhACAY=</HashCode>
+      <FileName>Ghosts\Ghost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.GhostTeam" Collapsed="true">
+    <Position X="32.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAACABAAABAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Ghosts\GhostTeam.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Inky">
+    <Position X="13.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAAAAABAAAAKQBAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ghosts\Inky.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Pinky">
+    <Position X="15.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAAAAABAAAAKQBAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ghosts\Pinky.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Interface" Collapsed="true">
+    <Position X="32" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAgACAACAAAAIEAAAAAAAAAAAAI=</HashCode>
+      <FileName>Interface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Pacman">
+    <Position X="2.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAgCBACABAgAAAAAAACAAAAAAAAAEAAA=</HashCode>
+      <FileName>Pacman.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Program" Collapsed="true">
+    <Position X="32" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAIAAAAAQAAAAIAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Sounds" Collapsed="true">
+    <Position X="32" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEEAAAAAAEAAAAAAAAAEAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sounds.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Forms.LogInForm" Collapsed="true">
+    <Position X="41.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABBAAAACAQAAAAQADAAEACIAQIQIAAAAAIAABAAAA=</HashCode>
+      <FileName>Forms\LogInForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Forms.RegisterForm" Collapsed="true">
+    <Position X="41.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAIACAQAAAAQATAAEACIAQIQIAAAAAIAABQAAA=</HashCode>
+      <FileName>Forms\RegisterForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Forms.Results" Collapsed="true">
+    <Position X="41.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAACQQAABAAACAAAACAAwAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Forms\Results.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Properties.Resources" Collapsed="true">
+    <Position X="32" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAgAACAEUAAQAgAAIBdAASAxQAChQIQAIgCgkBAaA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacmanGame_WinForms_.Properties.Settings" Collapsed="true">
+    <Position X="44" Y="3.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="PacmanGame_WinForms_.Direction" Collapsed="true">
+    <Position X="33.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAICAIAgAAAAAAAAAAA=</HashCode>
+      <FileName>Enum\Direction.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
