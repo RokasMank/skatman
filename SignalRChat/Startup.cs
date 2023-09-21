@@ -52,13 +52,16 @@ namespace SignalRChat
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
-            app.UseCors("CorsPolicy");
-            app.UseSignalR(routes =>
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapHub<ChatHub>("/chathub");
+                endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chathub");
             });
-            app.UseMvc();
         }
     }
 }

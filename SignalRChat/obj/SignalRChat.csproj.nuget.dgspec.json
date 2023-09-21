@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rokis\\OneDrive\\Stalinis kompiuteris\\pakman\\PacmanGame\\CourseProject\\SignalRChat\\SignalRChat.csproj": {}
+    "C:\\Users\\rokis\\OneDrive\\Stalinis kompiuteris\\skatmann\\SignalRChat\\SignalRChat.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rokis\\OneDrive\\Stalinis kompiuteris\\pakman\\PacmanGame\\CourseProject\\SignalRChat\\SignalRChat.csproj": {
+    "C:\\Users\\rokis\\OneDrive\\Stalinis kompiuteris\\skatmann\\SignalRChat\\SignalRChat.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rokis\\OneDrive\\Stalinis kompiuteris\\pakman\\PacmanGame\\CourseProject\\SignalRChat\\SignalRChat.csproj",
+        "projectUniqueName": "C:\\Users\\rokis\\OneDrive\\Stalinis kompiuteris\\skatmann\\SignalRChat\\SignalRChat.csproj",
         "projectName": "SignalRChat",
-        "projectPath": "C:\\Users\\rokis\\OneDrive\\Stalinis kompiuteris\\pakman\\PacmanGame\\CourseProject\\SignalRChat\\SignalRChat.csproj",
+        "projectPath": "C:\\Users\\rokis\\OneDrive\\Stalinis kompiuteris\\skatmann\\SignalRChat\\SignalRChat.csproj",
         "packagesPath": "C:\\Users\\rokis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rokis\\OneDrive\\Stalinis kompiuteris\\pakman\\PacmanGame\\CourseProject\\SignalRChat\\obj\\",
+        "outputPath": "C:\\Users\\rokis\\OneDrive\\Stalinis kompiuteris\\skatmann\\SignalRChat\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -21,15 +21,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp2.1"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp2.1": {
-            "targetAlias": "netcoreapp2.1",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -40,22 +40,8 @@
         }
       },
       "frameworks": {
-        "netcoreapp2.1": {
-          "targetAlias": "netcoreapp2.1",
-          "dependencies": {
-            "Microsoft.AspNetCore.App": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.1.1, )",
-              "autoReferenced": true
-            },
-            "Microsoft.NETCore.App": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.1.0, )",
-              "autoReferenced": true
-            }
-          },
+        "net6.0": {
+          "targetAlias": "net6.0",
           "imports": [
             "net461",
             "net462",
@@ -67,6 +53,14 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }

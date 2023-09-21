@@ -50,6 +50,37 @@ namespace PacmanGame_WinForms_
             Results res = new Results();
             res.Show();
         }
+        private async void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+        private async void Menu_Load(object sender, EventArgs e)
+        {
+            hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
+            {
+                var newMessage = $"{user}: {message}";
+                // Use Invoke to update the UI element on the main UI thread.
+                listBox1.Invoke((MethodInvoker)delegate {
+                    listBox1.Items.Add(newMessage);
+                });
+            });
+
+            try
+            {
+                await hubConnection.StartAsync();
+                // Use Invoke to update the UI element on the main UI thread.
+                listBox1.Invoke((MethodInvoker)delegate {
+                    listBox1.Items.Add(hubConnection.State);
+                });
+            }
+            catch (Exception ex)
+            {
+                // Use Invoke to update the UI element on the main UI thread.
+                listBox1.Invoke((MethodInvoker)delegate {
+                    listBox1.Items.Add(ex.Message);
+                });
+            }
+        }
 
         private async void button1_Click(object sender, EventArgs e)
         {
@@ -59,37 +90,11 @@ namespace PacmanGame_WinForms_
             }
             catch (Exception ex)
             {
-                //hubConnection.Items.Add(ex.Message);
+                // Use Invoke to update the UI element on the main UI thread.
+                listBox1.Invoke((MethodInvoker)delegate {
+                    listBox1.Items.Add(ex.Message);
+                });
             }
-        }
-
-        private async void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        private async void Menu_Load(object sender, EventArgs e)
-        {
-            hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
-            {
-                var newMessage = $"{user}: {message}";
-                listBox1.Items.Add(newMessage);
-            });
-
-            try
-            {
-                await hubConnection.StartAsync();
-                listBox1.Items.Add(hubConnection.State);
-            }
-            catch (Exception ex)
-            {
-                listBox1.Items.Add(ex.Message);
-            }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
