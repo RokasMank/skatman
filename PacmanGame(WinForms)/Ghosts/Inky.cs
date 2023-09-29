@@ -10,7 +10,7 @@ namespace PacmanGame_WinForms_
         private Direction control = Direction.UP;
         private int interval = Settings.Interval + 50;
 
-        private readonly Vector2 targetPoint = new Vector2(Controller.MapWidth - 2, Controller.MapHeight - 2);
+        private readonly Vector2 targetPoint = new Vector2(Controller.GetInstance().MapWidth - 2, Controller.GetInstance().MapHeight - 2);
 
         public Inky() : base()
         {

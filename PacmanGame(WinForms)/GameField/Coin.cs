@@ -18,12 +18,12 @@ namespace PacmanGame_WinForms_
         {
             GetScore();
             Image = Properties.Resources.Empty;
-            Controller.MakeEmpty(Y, X);
+            Controller.GetInstance().MakeEmpty(Y, X);
         }
 
         public override void GetScore()
         {
-            Controller.PacmanEatPoint();
+            Controller.GetInstance().PacmanEatPoint();
             Game.Score += 10;
         }
     }

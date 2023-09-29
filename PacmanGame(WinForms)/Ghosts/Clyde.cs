@@ -10,7 +10,7 @@ namespace PacmanGame_WinForms_
         private Direction control = Direction.DOWN;
         private int interval = Settings.Interval + 100;
 
-        private readonly Vector2 targetPoint = new Vector2(1, Controller.MapHeight - 2);
+        private readonly Vector2 targetPoint = new Vector2(1, Controller.GetInstance().MapHeight - 2);
 
 
         public Clyde() : base()

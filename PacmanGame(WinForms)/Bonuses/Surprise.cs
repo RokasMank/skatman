@@ -40,11 +40,11 @@ namespace PacmanGame_WinForms_
                 case 0:
                     if (num == 2)
                     {
-                        Controller.MinusLife();
+                        Controller.GetInstance().MinusLife();
                     }
                     else if (num == 4)
                     {
-                        Controller.DoubleScore();
+                        Controller.GetInstance().DoubleScore();
                     }
                     break;
             }

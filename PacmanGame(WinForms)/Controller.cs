@@ -13,62 +13,77 @@ namespace PacmanGame_WinForms_
 {
     class Controller
     {
-        public static int MapHeight = Game.Field.Rows;
-        public static int MapWidth = Game.Field.Columns;
+        private class SingletonHolder
+        {
+            public static Controller instance = new Controller();
+        }
 
-        public static int LevelMax = Game.MaxLevel;
+        public Controller()
+        {
 
-        public static Vector2 GetPacmanPos()
+        }
+
+        public static Controller GetInstance()
+        {
+            return SingletonHolder.instance;
+        }
+
+        public int MapHeight = Game.Field.Rows;
+        public int MapWidth = Game.Field.Columns;
+
+        public int LevelMax = Game.MaxLevel;
+
+        public Vector2 GetPacmanPos()
         {
             return new Vector2(Game.Pacman.X, Game.Pacman.Y);
         }
 
-        public static void MakeEmpty(int y, int x)
+        public void MakeEmpty(int y, int x)
         {
             Game.Field[y, x] = new EmptyPoint(x, y);
         }
 
-        public static void PacmanEatPoint()
+        public void PacmanEatPoint()
         {
             Field.CoinsCount -= 1;
         }
 
-        public static bool CheckRndPos(int x, int y)
+        public bool CheckRndPos(int x, int y)
         {
             return Game.Field[y, x] is Wall || Game.Field[y, x - 1] is Wall && Game.Field[y, x + 1] is Wall;
         }
 
-        public static bool PacmanHit(int x, int y)//
+        public bool PacmanHit(int x, int y)//
         {
             return x == Game.Pacman.X && y == Game.Pacman.Y && !Game.Pacman.GhostHit;
         }
 
-        public static bool GhostHit(int x, int y)
+        public bool GhostHit(int x, int y)
         {
             return x == Game.Pacman.X && y == Game.Pacman.Y;
         }
 
-        public static bool PacmanEatBonus(int x, int y)
+        public bool PacmanEatBonus(int x, int y)
         {
             return x == Game.Pacman.X && y == Game.Pacman.Y;
         }
 
-        public static bool EnergActive()
+        public bool EnergActive()
         {
             return Game.Energisers.Count > 0;
         }
 
-        public static bool CheckFieldLimit(int y, int x)
+        public bool CheckFieldLimit(int y, int x)
         {
             return x > 0 && x < MapWidth && y > 0 && y < MapHeight;
         }
 
-        static bool IndexOutOfRange(int y, int x)
+        bool IndexOutOfRange(int y, int x)
         {
             return x < 0 || x >= MapWidth || y < 0 || y >= MapHeight;
         }
 
-        public static bool GhostCheckWall(int y, int x)
+        public bool GhostCheckWall(int y, int x)
         {
             if (IndexOutOfRange(y, x))
             {
@@ -77,7 +92,7 @@ namespace PacmanGame_WinForms_
             return Game.Field[y, x] is Wall;
         }
 
-        public static Vector2 PacmanFuturePos(int length)
+        public Vector2 PacmanFuturePos(int length)
         {
             int x = Game.Pacman.X;
             int y = Game.Pacman.Y;
@@ -101,12 +116,12 @@ namespace PacmanGame_WinForms_
             return new Vector2(x, y);
         }
 
-        public static void MinusLife()
+        public void MinusLife()
         {
             Game.Lives -= 1;
         }
 
-        public static void PacmanHitGhost(int x, int y)
+        public void PacmanHitGhost(int x, int y)
         {
             var list = Game.GhostTeam;
 
@@ -126,7 +141,7 @@ namespace PacmanGame_WinForms_
             }
         }
 
-        public static bool PacmanCanMove(int y, int x)
+        public bool PacmanCanMove(int y, int x)
         {
             if (IndexOutOfRange(y, x))
             {
@@ -160,22 +175,22 @@ namespace PacmanGame_WinForms_
             return false;
         }
 
-        public static void PlusCoin()
+        public void PlusCoin()
         {
             Game.Score += Game.Score / 2;
         }
 
-        public static void ExtraLife()
+        public void ExtraLife()
         {
             Game.Lives += 1;
         }
 
-        public static void DoubleScore()
+        public void DoubleScore()
         {
             Game.Score *= 2;
         }
 
-        public static int[,] FillLogicMap()
+        public int[,] FillLogicMap()
         {
             int[,] grid = new int[MapHeight, MapWidth];
             const int wall = -10;
@@ -200,7 +215,7 @@ namespace PacmanGame_WinForms_
             return grid;
         }
 
-        public static void SaveResult(string st)
+        public void SaveResult(string st)
         {
             var user = LogInForm.User;
             var score = Game.Score;
@@ -245,12 +260,12 @@ namespace PacmanGame_WinForms_
             db.CloseConnection();
         }
 
-        public static void AddStringParams(SQLiteCommand command, string param, string value)
+        public void AddStringParams(SQLiteCommand command, string param, string value)
         {
             command.Parameters.Add(param, DbType.String).Value = value;
         }
 
-        public static void AddIntParams(SQLiteCommand command, string param, int value)
+        public void AddIntParams(SQLiteCommand command, string param, int value)
         {
             command.Parameters.Add(param, DbType.Int32).Value = value;
         }

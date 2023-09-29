@@ -52,7 +52,7 @@ namespace PacmanGame_WinForms_
 
         new void PacmanHit()
         {
-            if (Controller.PacmanEatBonus(X, Y))
+            if (Controller.GetInstance().PacmanEatBonus(X, Y))
             {
                 Action();
             }

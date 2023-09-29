@@ -42,10 +42,10 @@ namespace PacmanGame_WinForms_
 
         protected void SetRandomPos()
         {
-            X = rnd.Next(1, Controller.MapWidth - 2);
-            Y = rnd.Next(1, Controller.MapHeight - 2);
+            X = rnd.Next(1, Controller.GetInstance().MapWidth - 2);
+            Y = rnd.Next(1, Controller.GetInstance().MapHeight - 2);
 
-            if (Controller.CheckRndPos(X, Y))
+            if (Controller.GetInstance().CheckRndPos(X, Y))
             {
                 SetRandomPos();
             }
@@ -84,7 +84,7 @@ namespace PacmanGame_WinForms_
 
         public void PacmanHit()
         {
-            if (Controller.PacmanHit(X, Y))
+            if (Controller.GetInstance().PacmanHit(X, Y))
             {
                 Action();
                 pacmanHit = true;
@@ -93,7 +93,7 @@ namespace PacmanGame_WinForms_
 
         public void CheckEnergizerActive()
         { 
-            if (Controller.EnergActive())
+            if (Controller.GetInstance().EnergActive())
             {
                 Image = Properties.Resources.GrayGhost;               
                 ChangeInterval();
@@ -171,9 +171,9 @@ namespace PacmanGame_WinForms_
 
         void ShortestPathSearch()
         {
-            int W = Controller.MapWidth;
-            int H = Controller.MapHeight;
-            var grid = Controller.FillLogicMap();
+            int W = Controller.GetInstance().MapWidth;
+            int H = Controller.GetInstance().MapHeight;
+            var grid = Controller.GetInstance().FillLogicMap();
 
             var finish = setFinishPoint();
             int finishX = (int)finish.X;
@@ -219,8 +219,8 @@ namespace PacmanGame_WinForms_
 
         void ChooseNextStep(int[,] grid, Vector2 finish, int[] dy, int[] dx)
         {
-            int W = Controller.MapWidth;
-            int H = Controller.MapHeight;
+            int W = Controller.GetInstance().MapWidth;
+            int H = Controller.GetInstance().MapHeight;
 
             int[] px = new int[W * H];
             int[] py = new int[W * H];
@@ -289,7 +289,7 @@ namespace PacmanGame_WinForms_
 
         Vector2 setFinishPoint()
         {
-            if (Controller.GhostHit(X, Y))
+            if (Controller.GetInstance().GhostHit(X, Y))
             {
                 Hit = true;
             }
@@ -304,7 +304,7 @@ namespace PacmanGame_WinForms_
             }
             else
             {
-                return Controller.GetPacmanPos();
+                return Controller.GetInstance().GetPacmanPos();
             }
         }
 
@@ -361,7 +361,7 @@ namespace PacmanGame_WinForms_
 
         public bool CheckWall(int y, int x)
         {
-            return Controller.GhostCheckWall(y, x);
+            return Controller.GetInstance().GhostCheckWall(y, x);
         }
     }  
 }
