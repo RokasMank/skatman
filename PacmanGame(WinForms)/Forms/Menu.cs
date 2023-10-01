@@ -86,7 +86,7 @@ namespace PacmanGame_WinForms_
         {
             try
             {
-                await hubConnection.InvokeAsync("SendMessage", "dumbfuk", textBox1.Text);
+                await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
             }
             catch (Exception ex)
             {
