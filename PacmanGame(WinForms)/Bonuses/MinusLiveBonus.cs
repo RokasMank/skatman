@@ -30,7 +30,7 @@ namespace PacmanGame_WinForms_
 
         public override void GetScore()
         {
-            Controller.MinusLife();
+            Controller.GetInstance().MinusLife();
         }
     }
 }

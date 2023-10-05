@@ -38,7 +38,7 @@ namespace PacmanGame_WinForms_
                 ++Game.Steps;              
             }
 
-            Controller.PacmanHitGhost(X, Y);
+            Controller.GetInstance().PacmanHitGhost(X, Y);
         }
 
         private void ChangeImage(Direction direction)
@@ -69,7 +69,7 @@ namespace PacmanGame_WinForms_
                 case Direction.LEFT:
                     if (PortalOpened)
                     {
-                        X = Controller.MapWidth - 1;
+                        X = Controller.GetInstance().MapWidth - 1;
                         PortalOpened = false;
                     }
                     else
@@ -171,7 +171,7 @@ namespace PacmanGame_WinForms_
 
         private bool CheckPoint(int y, int x)
         {
-            if (Controller.PacmanCanMove(y, x))
+            if (Controller.GetInstance().PacmanCanMove(y, x))
             {
                 var matrix = Game.Field;
                 matrix[y, x].Action();

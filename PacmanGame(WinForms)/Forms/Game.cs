@@ -260,7 +260,7 @@ namespace PacmanGame_WinForms_
             else
                 MessageBox.Show("YOU FAILED!");
 
-            Controller.SaveResult("failed");
+            Controller.GetInstance().SaveResult("failed");
         }
 
         private void ClearForm()
@@ -301,7 +301,7 @@ namespace PacmanGame_WinForms_
             else
                 MessageBox.Show("YOU WON!");
 
-            Controller.SaveResult("won");
+            Controller.GetInstance().SaveResult("won");
         }
 
         void SetPacmanParams()

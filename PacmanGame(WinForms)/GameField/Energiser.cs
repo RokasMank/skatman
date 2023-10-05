@@ -23,7 +23,7 @@ namespace PacmanGame_WinForms_
         {
             GetScore();
             Image = Properties.Resources.Empty;
-            Controller.MakeEmpty(Y, X);
+            Controller.GetInstance().MakeEmpty(Y, X);
 
         }
 

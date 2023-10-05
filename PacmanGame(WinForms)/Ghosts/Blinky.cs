@@ -10,7 +10,7 @@ namespace PacmanGame_WinForms_
         private Direction control = Direction.LEFT;
         public int interval = Settings.Interval - 30;
 
-        private readonly Vector2 targetPoint = new Vector2(Controller.MapWidth - 2, 1);
+        private readonly Vector2 targetPoint = new Vector2(Controller.GetInstance().MapWidth - 2, 1);
 
         public Blinky() : base()
         {
