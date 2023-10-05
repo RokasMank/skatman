@@ -211,7 +211,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bonuses\BonusFactory.cs" />
+    <Compile Include="Bonuses\FactoryProducer.cs" />
+    <Compile Include="Bonuses\MinusBonusFactory.cs" />
     <Compile Include="Bonuses\MinusLiveBonus.cs" />
+    <Compile Include="Bonuses\PlusBonusFactory.cs" />
     <Compile Include="Bonuses\PlusLiveBonus.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="DataBase.cs" />

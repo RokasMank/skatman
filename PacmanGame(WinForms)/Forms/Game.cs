@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacmanGame_WinForms_.Bonuses;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -21,12 +22,13 @@ namespace PacmanGame_WinForms_
         public static int spentMinute { get; set; }
         public static int spentSecond { get; set; }
 
-
-        private static PlusLiveBonus PlusLiveBonus { get; set; }
-        private static MinusLiveBonus MinusLiveBonus { get; set; }
-        private static DoubleCoinBonus DoubleCoinBonus { get; set; }
-        private static PlusCoinBonus PlusCoinBonus { get; set; }
-        private static Surprise Surprise { get; set; }
+        private static BonusFactory minusbonusFactory = FactoryProducer.getFactory(true);
+        private static BonusFactory pliusbonusFactory = FactoryProducer.getFactory(false);
+        private static Bonus PlusLiveBonus { get; set; }
+        private static Bonus MinusLiveBonus { get; set; }
+        private static Bonus DoubleCoinBonus { get; set; }
+        private static Bonus PlusCoinBonus { get; set; }
+        private static Bonus Surprise { get; set; }
 
         private static List<Panel> BonusListPanel = new List<Panel>();
         private static List<Bonus> BonusList = new List<Bonus>();
@@ -78,11 +80,11 @@ namespace PacmanGame_WinForms_
             Field = new Field();
             GhostTeam = new GhostTeam();
 
-            PlusLiveBonus = new PlusLiveBonus();
-            MinusLiveBonus = new MinusLiveBonus();
-            DoubleCoinBonus = new DoubleCoinBonus();
-            PlusCoinBonus = new PlusCoinBonus();
-            Surprise = new Surprise();
+            PlusLiveBonus   = pliusbonusFactory.GetBonus("Live");
+            DoubleCoinBonus = pliusbonusFactory.GetBonus("Double");
+            PlusCoinBonus   = pliusbonusFactory.GetBonus("Coin");
+            MinusLiveBonus  = minusbonusFactory.GetBonus("Minus");
+            Surprise        = minusbonusFactory.GetBonus("Surprise");
         }
 
         private void GameLoad(object sender, EventArgs e)

@@ -232,7 +232,7 @@ namespace PacmanGame_WinForms_
             AddIntParams(command, "@level", level);
             AddIntParams(command, "@steps", steps);
             AddStringParams(command, "@totalTime", totalTime);           
-
+            /*
             if (command.ExecuteNonQuery() == 1)
             {
                 MessageBox.Show("Results saved successfully");
@@ -241,6 +241,7 @@ namespace PacmanGame_WinForms_
             {
                 MessageBox.Show("Fucking bitch!");
             }
+            */
 
             db.CloseConnection();
         }
