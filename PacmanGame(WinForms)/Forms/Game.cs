@@ -515,11 +515,13 @@ namespace PacmanGame_WinForms_
             RespaunGhost();
         }
 
-        void GhostChasingWave()
+        void GhostChasingWave() // here somthin
         {
             if (countdownSecond == timeForChasing)
             {
-                GhostTeam.SetChaseMode(true);
+                //GhostTeam.SetChaseMode(true);
+                Context context = new Context(new SetChaseing());
+                context.executeStrategy(GhostTeam);
                 timeForChasing = timeForChasing * 2 / 3;
 
                 if (timeForChasing == 1)
@@ -529,7 +531,9 @@ namespace PacmanGame_WinForms_
             }
             else if (countdownSecond == timeForRunning)
             {
-                GhostTeam.SetChaseMode(false);
+                //GhostTeam.SetChaseMode(false);
+                Context context = new Context(new RemoveChaseing());
+                context.executeStrategy(GhostTeam);
                 timeForRunning = timeForRunning * 5 / 8;
 
                 if (timeForRunning == 1)
