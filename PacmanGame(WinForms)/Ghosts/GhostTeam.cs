@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacmanGame_WinForms_.Ghosts;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
@@ -9,6 +10,7 @@ namespace PacmanGame_WinForms_
     {
         internal List<Ghost> List = new List<Ghost>();          
 
+        private GhostFactory GhostFactory = new GhostFactory();
         public GhostTeam()
         {
             CreateList();
@@ -58,10 +60,10 @@ namespace PacmanGame_WinForms_
 
         private void CreateList()
         {             
-            Ghost Blinky = new Blinky();
-            Ghost Pinky = new Pinky();
-            Ghost Inky = new Inky();
-            Ghost Clyde = new Clyde();
+            Ghost Blinky = GhostFactory.getGhost("BLINKY");
+            Ghost Pinky = GhostFactory.getGhost("PINKY");
+            Ghost Inky = GhostFactory.getGhost("INKY");
+            Ghost Clyde = GhostFactory.getGhost("CLYDE");
 
             List.Add(Blinky);
             List.Add(Pinky);
