@@ -79,6 +79,10 @@ namespace PacmanGame_WinForms_
         {
             Field = new Field();
             GhostTeam = new GhostTeam();
+            foreach (var ghost in GhostTeam.List)
+            {
+                Controller.GetInstance().AttachEnergiserObserver(ghost);
+            }
 
             PlusLiveBonus   = pliusbonusFactory.GetBonus("Live");
             DoubleCoinBonus = pliusbonusFactory.GetBonus("Double");
@@ -219,7 +223,7 @@ namespace PacmanGame_WinForms_
         void GhostMoving(int index)
         {
             GhostTeam[index].Move();
-            GhostTeam[index].CheckEnergizerActive();
+            GhostTeam[index].ChooseBehaviour();
             RemoveEnergiser();
 
             Interface.UpdateEnemy(GhostTeam[index], index);
@@ -436,6 +440,7 @@ namespace PacmanGame_WinForms_
 
         void RemoveEnergiser()
         {
+            bool activeEnergiserExisted = Game.Energisers.Count > 0;
             for (int i = 0; i < Energisers.Count; ++i)
             {
                 if (Energisers[i].ReadyToStop(Energisers[i].Time))
@@ -443,6 +448,9 @@ namespace PacmanGame_WinForms_
                     Energisers.RemoveAt(i);
                 }
             }
+            // No active energisers left after removal, ghosts start chasing
+            if (activeEnergiserExisted && Game.Energisers.Count == 0)
+                Controller.GetInstance().NotifyEnergiserObservers();
         }
 
         private void SetGameField()
