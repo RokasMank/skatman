@@ -11,11 +11,29 @@ namespace PacmanGame_WinForms_
         internal List<Ghost> List = new List<Ghost>();          
 
         private GhostFactory GhostFactory = new GhostFactory();
+        private Chasing strategy;
+
+        public GhostTeam(Chasing strategy)
+        {
+            this.strategy = strategy;
+        }
+
+        public void executeStrategy(GhostTeam ghostTeam)
+        {
+            strategy.Chase(ghostTeam);
+        }
         public GhostTeam()
         {
             CreateList();
         }
-
+        public int GetCount()
+        {
+            return List.Count;
+        }
+        public Ghost GetGhost(int index)
+        {
+            return List[index];
+        }
         internal Ghost this[int index]
         {
             get

@@ -519,8 +519,7 @@ namespace PacmanGame_WinForms_
         {
             if (countdownSecond == timeForChasing)
             {
-                //GhostTeam.SetChaseMode(true);
-                Context context = new Context(new SetChaseing());
+                Context context = new Context(new SetChasing());
                 context.executeStrategy(GhostTeam);
                 timeForChasing = timeForChasing * 2 / 3;
 
@@ -531,8 +530,7 @@ namespace PacmanGame_WinForms_
             }
             else if (countdownSecond == timeForRunning)
             {
-                //GhostTeam.SetChaseMode(false);
-                Context context = new Context(new RemoveChaseing());
+                Context context = new Context(new RemoveChasing());
                 context.executeStrategy(GhostTeam);
                 timeForRunning = timeForRunning * 5 / 8;
 
