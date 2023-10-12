@@ -66,7 +66,7 @@ namespace PacmanGame_WinForms_
         const int OneSecond = 1000;
         const int IntervalConstVal = 100;
 
-        static int timeForChasing = IntervalConstVal / 2;
+        static int timeToChange = IntervalConstVal / 2;
         static int timeForRunning = IntervalConstVal * 2 / 5;
 
         public Game()
@@ -525,19 +525,30 @@ namespace PacmanGame_WinForms_
 
         void GhostChasingWave()
         {
-            if (countdownSecond == timeForChasing)
-            {
-                GhostTeam.SetChaseMode(true);
-                timeForChasing = timeForChasing * 2 / 3;
+            Context chase = new Context(new Chase());
+            Context run = new Context(new Chase());
 
-                if (timeForChasing == 1)
+            if (countdownSecond == timeToChange)
+            {
+                chase.executeStrategy(GhostTeam[0]);
+                chase.executeStrategy(GhostTeam[1]);
+                run.executeStrategy(GhostTeam[2]);
+                run.executeStrategy(GhostTeam[3]);
+
+                timeToChange = timeToChange * 2 / 3;
+
+                if (timeToChange == 1)
                 {
-                    timeForChasing = IntervalConstVal / 2;
+                    timeToChange = IntervalConstVal / 2;
                 }
             }
             else if (countdownSecond == timeForRunning)
             {
-                GhostTeam.SetChaseMode(false);
+                run.executeStrategy(GhostTeam[0]);
+                run.executeStrategy(GhostTeam[1]);
+                chase.executeStrategy(GhostTeam[2]);
+                chase.executeStrategy(GhostTeam[3]);
+
                 timeForRunning = timeForRunning * 5 / 8;
 
                 if (timeForRunning == 1)

@@ -41,6 +41,17 @@ namespace PacmanGame_WinForms_
 
         protected Random rnd = new Random();
 
+        private Movement strategy;
+
+        public Ghost(Movement strategy)
+        {
+            this.strategy = strategy;
+        }
+
+        public void executeStrategy(Ghost ghost)
+        {
+            strategy.Move(ghost);
+        }
         protected void SetRandomPos()
         {
             X = rnd.Next(1, Controller.GetInstance().MapWidth - 2);
