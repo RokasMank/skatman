@@ -27,11 +27,30 @@ namespace PacmanGame_WinForms_
         {
             return SingletonHolder.instance;
         }
+        private List<IEnergiserObserver> EnergiserObservers = new List<IEnergiserObserver>();
 
         public int MapHeight = Game.Field.Rows;
         public int MapWidth = Game.Field.Columns;
 
         public int LevelMax = Game.MaxLevel;
+
+        public void AttachEnergiserObserver(IEnergiserObserver observer)
+        {
+            EnergiserObservers.Add(observer);
+        }
+
+        public void DetachEnergiserObserver(IEnergiserObserver observer)
+        {
+            EnergiserObservers.Remove(observer);
+        }
+
+        public void NotifyEnergiserObservers()
+        {
+            foreach (var observer in EnergiserObservers)
+            {
+                observer.Update();
+            }
+        }
 
         public Vector2 GetPacmanPos()
         {
@@ -66,11 +85,6 @@ namespace PacmanGame_WinForms_
         public bool PacmanEatBonus(int x, int y)
         {
             return x == Game.Pacman.X && y == Game.Pacman.Y;
-        }
-
-        public bool EnergActive()
-        {
-            return Game.Energisers.Count > 0;
         }
 
         public bool CheckFieldLimit(int y, int x)
@@ -159,6 +173,11 @@ namespace PacmanGame_WinForms_
             if (matrix[y, x] is Energiser)
             {               
                 Game.Energisers.Add(new Energiser(x, y, Game.TimeEnergiserActive));
+
+                // No active energisers before, ghosts stop chasing
+                if (Game.Energisers.Count == 1)
+                    Controller.GetInstance().NotifyEnergiserObservers();
+
                 return true;
             }
 

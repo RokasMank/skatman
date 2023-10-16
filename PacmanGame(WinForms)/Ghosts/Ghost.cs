@@ -8,7 +8,7 @@ using System.Timers;
 
 namespace PacmanGame_WinForms_
 {
-    public abstract class Ghost : BasePoint
+    public abstract class Ghost : BasePoint, IEnergiserObserver
     {
         public bool passive = false;
         public bool _isEmpty = false;
@@ -17,7 +17,8 @@ namespace PacmanGame_WinForms_
         public const int ReadyRespaun = 10;
         public int Wait = 0;
         private readonly int respaunX;
-        private readonly int respaunY;     
+        private readonly int respaunY;
+        private bool energiserActive = false;
 
         public Ghost() : base()
         {
@@ -91,9 +92,9 @@ namespace PacmanGame_WinForms_
             }
         }
 
-        public void CheckEnergizerActive()
+        public void ChooseBehaviour()
         { 
-            if (Controller.GetInstance().EnergActive())
+            if (energiserActive)
             {
                 Image = Properties.Resources.GrayGhost;               
                 ChangeInterval();
@@ -362,6 +363,11 @@ namespace PacmanGame_WinForms_
         public bool CheckWall(int y, int x)
         {
             return Controller.GetInstance().GhostCheckWall(y, x);
+        }
+
+        public void Update()
+        {
+            energiserActive = !energiserActive;
         }
     }  
 }
