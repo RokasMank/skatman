@@ -43,14 +43,14 @@ namespace PacmanGame_WinForms_
 
         private Movement strategy;
 
-        public Ghost(Movement strategy)
+        public void SetMovement(Movement strategy)
         {
             this.strategy = strategy;
         }
 
-        public void executeStrategy(Ghost ghost)
+        public void executeStrategy()
         {
-            strategy.Move(ghost);
+            strategy.Move(this);
         }
         protected void SetRandomPos()
         {

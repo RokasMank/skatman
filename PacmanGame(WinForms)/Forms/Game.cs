@@ -525,15 +525,19 @@ namespace PacmanGame_WinForms_
 
         void GhostChasingWave()
         {
-            Context chase = new Context(new Chase());
-            Context run = new Context(new Chase());
+            Chase chase = new Chase();
+            Run run = new Run();
 
             if (countdownSecond == timeToChange)
             {
-                chase.executeStrategy(GhostTeam[0]);
-                chase.executeStrategy(GhostTeam[1]);
-                run.executeStrategy(GhostTeam[2]);
-                run.executeStrategy(GhostTeam[3]);
+                GhostTeam[0].SetMovement(chase);
+                GhostTeam[0].executeStrategy();
+                GhostTeam[1].SetMovement(chase);
+                GhostTeam[1].executeStrategy();
+                GhostTeam[2].SetMovement(run);
+                GhostTeam[2].executeStrategy();
+                GhostTeam[3].SetMovement(run);
+                GhostTeam[3].executeStrategy();
 
                 timeToChange = timeToChange * 2 / 3;
 
@@ -544,10 +548,14 @@ namespace PacmanGame_WinForms_
             }
             else if (countdownSecond == timeForRunning)
             {
-                run.executeStrategy(GhostTeam[0]);
-                run.executeStrategy(GhostTeam[1]);
-                chase.executeStrategy(GhostTeam[2]);
-                chase.executeStrategy(GhostTeam[3]);
+                GhostTeam[0].SetMovement(run);
+                GhostTeam[0].executeStrategy();
+                GhostTeam[1].SetMovement(run);
+                GhostTeam[1].executeStrategy();
+                GhostTeam[2].SetMovement(chase);
+                GhostTeam[2].executeStrategy();
+                GhostTeam[3].SetMovement(chase);
+                GhostTeam[3].executeStrategy();
 
                 timeForRunning = timeForRunning * 5 / 8;
 
