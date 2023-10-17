@@ -288,7 +288,6 @@
     <Compile Include="Sounds.cs" />
     <Compile Include="Strategy\Chase.cs" />
     <Compile Include="Strategy\Movement.cs" />
-    <Compile Include="Strategy\Context.cs" />
     <Compile Include="Strategy\Run.cs" />
     <EmbeddedResource Include="Forms\LogInForm.resx">
       <DependentUpon>LogInForm.cs</DependentUpon>
