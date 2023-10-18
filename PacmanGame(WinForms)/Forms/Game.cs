@@ -66,7 +66,7 @@ namespace PacmanGame_WinForms_
         const int OneSecond = 1000;
         const int IntervalConstVal = 100;
 
-        static int timeForChasing = IntervalConstVal / 2;
+        static int timeToChange = IntervalConstVal / 2;
         static int timeForRunning = IntervalConstVal * 2 / 5;
 
         public Game()
@@ -525,19 +525,38 @@ namespace PacmanGame_WinForms_
 
         void GhostChasingWave()
         {
-            if (countdownSecond == timeForChasing)
-            {
-                GhostTeam.SetChaseMode(true);
-                timeForChasing = timeForChasing * 2 / 3;
+            Chase chase = new Chase();
+            Run run = new Run();
 
-                if (timeForChasing == 1)
+            if (countdownSecond == timeToChange)
+            {
+                GhostTeam[0].SetMovement(chase);
+                GhostTeam[0].executeStrategy();
+                GhostTeam[1].SetMovement(chase);
+                GhostTeam[1].executeStrategy();
+                GhostTeam[2].SetMovement(run);
+                GhostTeam[2].executeStrategy();
+                GhostTeam[3].SetMovement(run);
+                GhostTeam[3].executeStrategy();
+
+                timeToChange = timeToChange * 2 / 3;
+
+                if (timeToChange == 1)
                 {
-                    timeForChasing = IntervalConstVal / 2;
+                    timeToChange = IntervalConstVal / 2;
                 }
             }
             else if (countdownSecond == timeForRunning)
             {
-                GhostTeam.SetChaseMode(false);
+                GhostTeam[0].SetMovement(run);
+                GhostTeam[0].executeStrategy();
+                GhostTeam[1].SetMovement(run);
+                GhostTeam[1].executeStrategy();
+                GhostTeam[2].SetMovement(chase);
+                GhostTeam[2].executeStrategy();
+                GhostTeam[3].SetMovement(chase);
+                GhostTeam[3].executeStrategy();
+
                 timeForRunning = timeForRunning * 5 / 8;
 
                 if (timeForRunning == 1)
