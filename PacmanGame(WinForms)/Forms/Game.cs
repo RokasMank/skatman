@@ -1,4 +1,4 @@
-using PacmanGame_WinForms_.Bonuses;
+﻿using PacmanGame_WinForms_.Bonuses;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
