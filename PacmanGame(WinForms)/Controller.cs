@@ -1,4 +1,4 @@
-﻿using PacmanGame_WinForms_.Forms;
+using PacmanGame_WinForms_.Forms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -171,7 +171,7 @@ namespace PacmanGame_WinForms_
             }
 
             if (matrix[y, x] is Energiser)
-            {               
+            {
                 Game.Energisers.Add(new Energiser(x, y, Game.TimeEnergiserActive));
 
                 // No active energisers before, ghosts stop chasing
@@ -248,7 +248,7 @@ namespace PacmanGame_WinForms_
             else
                 totalTime = $"0{Game.spentMinute}:0{Game.spentSecond}";
 
-            
+
 
             DataBase db = new DataBase();
             db.OpenConnection();
@@ -265,7 +265,7 @@ namespace PacmanGame_WinForms_
             AddStringParams(command, "@state", state);
             AddIntParams(command, "@level", level);
             AddIntParams(command, "@steps", steps);
-            AddStringParams(command, "@totalTime", totalTime);           
+            AddStringParams(command, "@totalTime", totalTime);
             /*
             if (command.ExecuteNonQuery() == 1)
             {
