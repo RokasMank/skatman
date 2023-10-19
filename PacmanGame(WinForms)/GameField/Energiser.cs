@@ -3,7 +3,7 @@
 
 namespace PacmanGame_WinForms_
 {
-    public class Energiser : BasePoint
+    public class Energiser : BasePoint, ICloneable
     {
         public Energiser(int x, int y)
             : base(x, y)
@@ -46,6 +46,11 @@ namespace PacmanGame_WinForms_
         {
             DateTime time = DateTime.Now;
             return time.AddMilliseconds(milliseconds);
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();  
         }
     }
 }

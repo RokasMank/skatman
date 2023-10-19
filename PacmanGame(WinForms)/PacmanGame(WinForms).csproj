@@ -238,6 +238,7 @@
       <DependentUpon>Results.cs</DependentUpon>
     </Compile>
     <Compile Include="GameField\BasePoint.cs" />
+    <Compile Include="GameField\GhostFactory.cs" />
     <Compile Include="Ghosts\Blinky.cs" />
     <Compile Include="Bonuses\Bonus.cs" />
     <Compile Include="Ghosts\Clyde.cs" />
@@ -250,6 +251,7 @@
     <Compile Include="Ghosts\GhostTeam.cs" />
     <Compile Include="Ghosts\Inky.cs" />
     <Compile Include="GameField\SourceFile.cs" />
+    <Compile Include="IEnergiserObserver.cs" />
     <Compile Include="Interface.cs" />
     <Compile Include="Pacman.cs" />
     <Compile Include="Ghosts\Pinky.cs" />

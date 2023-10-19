@@ -13,20 +13,34 @@ namespace PacmanGame_WinForms_
 {
     class Controller
     {
-        private class SingletonHolder
-        {
-            public static Controller instance = new Controller();
-        }
+        private static Controller instance;
+        // //private class SingletonHolder
+        // {
+        //    public static Controller instance = new Controller();
+        //}
+        // public static Controller GetInstance()
+        // {
+        //     return SingletonHolder.instance;
+        // }
+        private static object threadLock = new object();
 
         public Controller()
         {
 
         }
-
         public static Controller GetInstance()
         {
-            return SingletonHolder.instance;
+            lock (threadLock)
+            {
+                if (instance == null)
+                {
+                    instance = new Controller();
+                }
+            }
+            
+            return instance;
         }
+
         private List<IEnergiserObserver> EnergiserObservers = new List<IEnergiserObserver>();
 
         public int MapHeight = Game.Field.Rows;
@@ -172,7 +186,7 @@ namespace PacmanGame_WinForms_
 
             if (matrix[y, x] is Energiser)
             {               
-                Game.Energisers.Add(new Energiser(x, y, Game.TimeEnergiserActive));
+                Game.Energisers.Add((Energiser)((Energiser)(matrix[y, x])).Clone());
 
                 // No active energisers before, ghosts stop chasing
                 if (Game.Energisers.Count == 1)
