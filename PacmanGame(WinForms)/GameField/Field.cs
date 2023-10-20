@@ -108,13 +108,13 @@ namespace PacmanGame_WinForms_
                             Matrix[i, j] = new Wall(j, i) { Image = Properties.Resources.Portal, Portal = true };
                             break;
                         case '.':
-                            _coinBuilder.SetPosition(j, i).BuildImage().BuildAction();
+                            _coinBuilder.SetPosition(j, i).BuildImage();
                             Coin newCoin = (_coinBuilder as CoinBuilder).Build();
                             Matrix[i, j] = newCoin;
                             ++CoinsCount;
                             break;
                         case '@':
-                            _energiserBuilder.SetPosition(j, i).BuildImage().BuildAction();
+                            _energiserBuilder.SetPosition(j, i).BuildImage();
                             Energiser newEnergiser = (_energiserBuilder as EnergiserBuilder).Build();
                             Matrix[i, j] = newEnergiser;
                             break;

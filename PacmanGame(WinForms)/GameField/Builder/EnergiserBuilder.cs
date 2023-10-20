@@ -17,13 +17,14 @@ namespace PacmanGame_WinForms_.GameField
 
         public EnergiserBuilder()
         {
-            _energiser = new Energiser(this.x, this.y);
+            
         }
 
         public IBuilder SetPosition(int x, int y)
         {
             this.x = x;
             this.y = y;
+            _energiser = new Energiser(this.x, this.y);
             return this;
         }
 

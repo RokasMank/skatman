@@ -16,13 +16,14 @@ namespace PacmanGame_WinForms_.GameField
 
         public CoinBuilder()
         {
-            _coin = new Coin(this.x, this.y);
+            
         }
 
         public IBuilder SetPosition(int x, int y)
         {
             this.x = x;
             this.y = y;
+            _coin = new Coin(this.x, this.y);
             return this;
         }
 
