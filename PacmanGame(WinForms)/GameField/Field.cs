@@ -1,6 +1,7 @@
 ﻿using Microsoft.SqlServer.Server;
 using Newtonsoft.Json;
-
+using PacmanGame_WinForms_.GameField;
+using PacmanGame_WinForms_.GameField.Builder;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -19,10 +20,14 @@ namespace PacmanGame_WinForms_
 
         private SourceFile[] Source { get; set; }
 
+        IBuilder _energiserBuilder;
+        IBuilder _coinBuilder;
+
         public Field()
         {
             try
             {
+                
                 LoadJson();
                 CreateMatrix();
             }
@@ -82,6 +87,9 @@ namespace PacmanGame_WinForms_
 
         void CreateMatrix()
         {
+            this._coinBuilder = new CoinBuilder();
+            this._energiserBuilder = new EnergiserBuilder();
+
             CoinsCount = 0;           
 
             char[,] matrix = FileReading();
@@ -100,11 +108,15 @@ namespace PacmanGame_WinForms_
                             Matrix[i, j] = new Wall(j, i) { Image = Properties.Resources.Portal, Portal = true };
                             break;
                         case '.':
-                            Matrix[i, j] = new Coin(j, i);
+                            _coinBuilder.SetPosition(j, i).BuildImage();
+                            Coin newCoin = (_coinBuilder as CoinBuilder).Build();
+                            Matrix[i, j] = newCoin;
                             ++CoinsCount;
                             break;
                         case '@':
-                            Matrix[i, j] = new Energiser(j, i);
+                            _energiserBuilder.SetPosition(j, i).BuildImage();
+                            Energiser newEnergiser = (_energiserBuilder as EnergiserBuilder).Build();
+                            Matrix[i, j] = newEnergiser;
                             break;
                         case ' ':
                             Matrix[i, j] = new EmptyPoint(j, i);

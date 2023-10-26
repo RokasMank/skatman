@@ -13,20 +13,27 @@ namespace PacmanGame_WinForms_
 {
     class Controller
     {
-        private class SingletonHolder
-        {
-            public static Controller instance = new Controller();
-        }
+        private static Controller instance;
+        
+        private static object threadLock = new object();
 
         public Controller()
         {
 
         }
-
         public static Controller GetInstance()
         {
-            return SingletonHolder.instance;
+            lock (threadLock)
+            {
+                if (instance == null)
+                {
+                    instance = new Controller();
+                }
+            }
+            
+            return instance;
         }
+
         private List<IEnergiserObserver> EnergiserObservers = new List<IEnergiserObserver>();
 
         public int MapHeight = Game.Field.Rows;
@@ -171,8 +178,19 @@ namespace PacmanGame_WinForms_
             }
 
             if (matrix[y, x] is Energiser)
+
             {               
-                Game.Energisers.Add(new Energiser(x, y, Game.TimeEnergiserActive));
+                Game.Energisers.Add((Energiser)((Energiser)(matrix[y, x])).DeepClone(Game.TimeEnergiserActive));
+               // Game.Energisers.Add(new Energiser(x, y, Game.TimeEnergiserActive));
+                Energiser prototype = new Energiser(x, y, Game.TimeEnergiserActive);
+                Energiser deepClone = (Energiser)prototype.DeepClone(Game.TimeEnergiserActive);
+
+                // Returns 'false' => the original instance was successfully copied to a new instance, ...
+                bool isTheSameInstance = object.ReferenceEquals(prototype, deepClone);
+                
+                // ...and also the data is not the same => deep copy or deep clone
+                isTheSameInstance = object.ReferenceEquals(prototype.Image, deepClone.Image); // false
+                
 
                 // No active energisers before, ghosts stop chasing
                 if (Game.Energisers.Count == 1)
@@ -248,7 +266,7 @@ namespace PacmanGame_WinForms_
             else
                 totalTime = $"0{Game.spentMinute}:0{Game.spentSecond}";
 
-            
+
 
             DataBase db = new DataBase();
             db.OpenConnection();
@@ -265,7 +283,7 @@ namespace PacmanGame_WinForms_
             AddStringParams(command, "@state", state);
             AddIntParams(command, "@level", level);
             AddIntParams(command, "@steps", steps);
-            AddStringParams(command, "@totalTime", totalTime);           
+            AddStringParams(command, "@totalTime", totalTime);
             /*
             if (command.ExecuteNonQuery() == 1)
             {

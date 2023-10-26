@@ -55,7 +55,7 @@ namespace PacmanGame_WinForms_
 
         public static List<Energiser> Energisers = new List<Energiser>();
         public static int TimeEnergiserActive { get; set; }
-        
+
         public static int Interval { get; set; }
         public static string PlayerName;
 
@@ -86,11 +86,11 @@ namespace PacmanGame_WinForms_
                 Controller.GetInstance().AttachEnergiserObserver(ghost);
             }
 
-            PlusLiveBonus   = pliusbonusFactory.GetBonus("Live");
+            PlusLiveBonus = pliusbonusFactory.GetBonus("Live");
             DoubleCoinBonus = pliusbonusFactory.GetBonus("Double");
-            PlusCoinBonus   = pliusbonusFactory.GetBonus("Coin");
-            MinusLiveBonus  = minusbonusFactory.GetBonus("Minus");
-            Surprise        = minusbonusFactory.GetBonus("Surprise");
+            PlusCoinBonus = pliusbonusFactory.GetBonus("Coin");
+            MinusLiveBonus = minusbonusFactory.GetBonus("Minus");
+            Surprise = minusbonusFactory.GetBonus("Surprise");
         }
 
         private void GameLoad(object sender, EventArgs e)
@@ -107,7 +107,7 @@ namespace PacmanGame_WinForms_
             InfoBlock = Interface.SetInfoLabel();
             Controls.Add(InfoBlock);
 
-            SetTimer();           
+            SetTimer();
         }
 
         private void GameKeyDown(object sender, KeyEventArgs e)
@@ -383,25 +383,25 @@ namespace PacmanGame_WinForms_
 
             if (Interval == IntervalConstVal)
             {
-                countdownMinute = MinuteConstVal; 
-                countdownSecond = SecondConstVal; 
-                TimeEnergiserActive = TimeEnergActConstVal; 
+                countdownMinute = MinuteConstVal;
+                countdownSecond = SecondConstVal;
+                TimeEnergiserActive = TimeEnergActConstVal;
             }
 
             else if (Interval < IntervalConstVal)
             {
-                countdownMinute = MinuteConstVal; 
-                countdownSecond = SecondConstVal - MinuteConstVal * 30; 
-                TimeEnergiserActive = TimeEnergActConstVal - TimeEnergActConstVal / 3; 
+                countdownMinute = MinuteConstVal;
+                countdownSecond = SecondConstVal - MinuteConstVal * 30;
+                TimeEnergiserActive = TimeEnergActConstVal - TimeEnergActConstVal / 3;
             }
 
             else if (Interval > IntervalConstVal)
             {
-                countdownMinute = MinuteConstVal * 2; 
-                countdownSecond = SecondConstVal - MinuteConstVal * 30; 
-                TimeEnergiserActive = TimeEnergActConstVal + TimeEnergActConstVal / 3; 
+                countdownMinute = MinuteConstVal * 2;
+                countdownSecond = SecondConstVal - MinuteConstVal * 30;
+                TimeEnergiserActive = TimeEnergActConstVal + TimeEnergActConstVal / 3;
             }
-        }             
+        }
 
         //void PacmanEatBonus()
         //{
@@ -485,7 +485,7 @@ namespace PacmanGame_WinForms_
 
             UpdateInfo();
 
-            Hero = CreatePanel();           
+            Hero = CreatePanel();
             Hero.BringToFront();
             Interface.UpdateHero();
         }
@@ -518,7 +518,7 @@ namespace PacmanGame_WinForms_
             }
 
             if (countdownMinute == 0 && countdownSecond == 0)
-            {               
+            {
                 label6.Text = $"Time left:\r\n0{countdownMinute}:{countdownSecond}\r\n\r\n";
                 YouFailed();
             }
@@ -613,6 +613,6 @@ namespace PacmanGame_WinForms_
             }
 
             UpdateInfo();
-        }        
+        }
     }
 }
