@@ -14,14 +14,7 @@ namespace PacmanGame_WinForms_
     class Controller
     {
         private static Controller instance;
-        // //private class SingletonHolder
-        // {
-        //    public static Controller instance = new Controller();
-        //}
-        // public static Controller GetInstance()
-        // {
-        //     return SingletonHolder.instance;
-        // }
+        
         private static object threadLock = new object();
 
         public Controller()
@@ -186,8 +179,17 @@ namespace PacmanGame_WinForms_
 
             if (matrix[y, x] is Energiser)
             {               
-                Game.Energisers.Add((Energiser)((Energiser)(matrix[y, x])).Clone());
+                Game.Energisers.Add((Energiser)((Energiser)(matrix[y, x])).DeepClone(Game.TimeEnergiserActive));
+               // Game.Energisers.Add(new Energiser(x, y, Game.TimeEnergiserActive));
+                Energiser prototype = new Energiser(x, y, Game.TimeEnergiserActive);
+                Energiser deepClone = (Energiser)prototype.DeepClone(Game.TimeEnergiserActive);
 
+                // Returns 'false' => the original instance was successfully copied to a new instance, ...
+                bool isTheSameInstance = object.ReferenceEquals(prototype, deepClone);
+                
+                // ...and also the data is not the same => deep copy or deep clone
+                isTheSameInstance = object.ReferenceEquals(prototype.Image, deepClone.Image); // false
+                
                 // No active energisers before, ghosts stop chasing
                 if (Game.Energisers.Count == 1)
                     Controller.GetInstance().NotifyEnergiserObservers();

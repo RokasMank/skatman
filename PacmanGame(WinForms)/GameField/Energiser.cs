@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Drawing;
 
 namespace PacmanGame_WinForms_
 {
@@ -51,6 +51,13 @@ namespace PacmanGame_WinForms_
         public object Clone()
         {
             return this.MemberwiseClone();  
+        }
+        public object DeepClone(int timeStop)
+        {
+            var newenergiser = (Energiser)MemberwiseClone();
+            newenergiser.Image = new Bitmap(Properties.Resources.Energizer);
+            newenergiser.Time = SetTimeToChange(timeStop);
+            return newenergiser;
         }
     }
 }
