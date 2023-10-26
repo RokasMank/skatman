@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PacmanGame_WinForms_.Ghosts
+namespace PacmanGame_WinForms_
 {
     public class GhostFactory
     {
