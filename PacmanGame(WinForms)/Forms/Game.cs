@@ -44,6 +44,8 @@ namespace PacmanGame_WinForms_
 
         public static Field Field;
         public static Pacman Pacman;
+        public static Pacman PacmanTwo = new Pacman(9,13);
+
         public static GhostTeam GhostTeam;
 
         public static int Score { get; set; }
@@ -115,6 +117,8 @@ namespace PacmanGame_WinForms_
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
             {
                 Pacman.ChangeDirection(e);
+                PacmanTwo.ChangeDirection(e);
+
             }
 
             else if (e.KeyCode == Keys.F5)
@@ -175,6 +179,7 @@ namespace PacmanGame_WinForms_
         private void PacmanMoving(object sender, EventArgs e)
         {
             Pacman.Move();
+            PacmanTwo.Move();
             //PacmanEatBonus();
 
             Interface.UpdateHero();
