@@ -238,6 +238,7 @@
       <DependentUpon>Results.cs</DependentUpon>
     </Compile>
     <Compile Include="GameField\BasePoint.cs" />
+    <Compile Include="GameField\GhostFactory.cs" />
     <Compile Include="GameField\Builder\CoinBuilder.cs" />
     <Compile Include="GameField\Builder\EnergiserBuilder.cs" />
     <Compile Include="GameField\Builder\IBuilder.cs" />
