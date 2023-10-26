@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PacmanGame_WinForms_
 {
-    class Coin : BasePoint
+    public class Coin : BasePoint
     {
         public Coin(int x, int y)
             : base(x, y)
