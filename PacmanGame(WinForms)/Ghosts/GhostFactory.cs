@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PacmanGame_WinForms_.Ghosts
+﻿namespace PacmanGame_WinForms_.Ghosts
 {
     public class GhostFactory
     {
         public Ghost getGhost(string name)
         {
-            if(name == null)
+            if (name == null)
             {
                 return null;
             }

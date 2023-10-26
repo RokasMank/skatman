@@ -239,6 +239,9 @@
     </Compile>
     <Compile Include="GameField\BasePoint.cs" />
     <Compile Include="GameField\GhostFactory.cs" />
+    <Compile Include="GameField\Builder\CoinBuilder.cs" />
+    <Compile Include="GameField\Builder\EnergiserBuilder.cs" />
+    <Compile Include="GameField\Builder\IBuilder.cs" />
     <Compile Include="Ghosts\Blinky.cs" />
     <Compile Include="Bonuses\Bonus.cs" />
     <Compile Include="Ghosts\Clyde.cs" />
@@ -248,6 +251,7 @@
     <Compile Include="GameField\Energiser.cs" />
     <Compile Include="GameField\Field.cs" />
     <Compile Include="Ghosts\Ghost.cs" />
+    <Compile Include="Ghosts\GhostFactory.cs" />
     <Compile Include="Ghosts\GhostTeam.cs" />
     <Compile Include="Ghosts\Inky.cs" />
     <Compile Include="GameField\SourceFile.cs" />
@@ -286,6 +290,9 @@
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="Sounds.cs" />
+    <Compile Include="Strategy\Chase.cs" />
+    <Compile Include="Strategy\Movement.cs" />
+    <Compile Include="Strategy\Run.cs" />
     <EmbeddedResource Include="Forms\LogInForm.resx">
       <DependentUpon>LogInForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -458,6 +465,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -178,6 +178,7 @@ namespace PacmanGame_WinForms_
             }
 
             if (matrix[y, x] is Energiser)
+
             {               
                 Game.Energisers.Add((Energiser)((Energiser)(matrix[y, x])).DeepClone(Game.TimeEnergiserActive));
                // Game.Energisers.Add(new Energiser(x, y, Game.TimeEnergiserActive));
@@ -190,6 +191,7 @@ namespace PacmanGame_WinForms_
                 // ...and also the data is not the same => deep copy or deep clone
                 isTheSameInstance = object.ReferenceEquals(prototype.Image, deepClone.Image); // false
                 
+
                 // No active energisers before, ghosts stop chasing
                 if (Game.Energisers.Count == 1)
                     Controller.GetInstance().NotifyEnergiserObservers();
@@ -264,7 +266,7 @@ namespace PacmanGame_WinForms_
             else
                 totalTime = $"0{Game.spentMinute}:0{Game.spentSecond}";
 
-            
+
 
             DataBase db = new DataBase();
             db.OpenConnection();
@@ -281,7 +283,7 @@ namespace PacmanGame_WinForms_
             AddStringParams(command, "@state", state);
             AddIntParams(command, "@level", level);
             AddIntParams(command, "@steps", steps);
-            AddStringParams(command, "@totalTime", totalTime);           
+            AddStringParams(command, "@totalTime", totalTime);
             /*
             if (command.ExecuteNonQuery() == 1)
             {

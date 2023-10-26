@@ -53,7 +53,7 @@ namespace PacmanGame_WinForms_
 
         public static List<Energiser> Energisers = new List<Energiser>();
         public static int TimeEnergiserActive { get; set; }
-        
+
         public static int Interval { get; set; }
         public static string PlayerName;
 
@@ -66,7 +66,7 @@ namespace PacmanGame_WinForms_
         const int OneSecond = 1000;
         const int IntervalConstVal = 100;
 
-        static int timeForChasing = IntervalConstVal / 2;
+        static int timeToChange = IntervalConstVal / 2;
         static int timeForRunning = IntervalConstVal * 2 / 5;
 
         public Game()
@@ -84,11 +84,11 @@ namespace PacmanGame_WinForms_
                 Controller.GetInstance().AttachEnergiserObserver(ghost);
             }
 
-            PlusLiveBonus   = pliusbonusFactory.GetBonus("Live");
+            PlusLiveBonus = pliusbonusFactory.GetBonus("Live");
             DoubleCoinBonus = pliusbonusFactory.GetBonus("Double");
-            PlusCoinBonus   = pliusbonusFactory.GetBonus("Coin");
-            MinusLiveBonus  = minusbonusFactory.GetBonus("Minus");
-            Surprise        = minusbonusFactory.GetBonus("Surprise");
+            PlusCoinBonus = pliusbonusFactory.GetBonus("Coin");
+            MinusLiveBonus = minusbonusFactory.GetBonus("Minus");
+            Surprise = minusbonusFactory.GetBonus("Surprise");
         }
 
         private void GameLoad(object sender, EventArgs e)
@@ -105,7 +105,7 @@ namespace PacmanGame_WinForms_
             InfoBlock = Interface.SetInfoLabel();
             Controls.Add(InfoBlock);
 
-            SetTimer();           
+            SetTimer();
         }
 
         private void GameKeyDown(object sender, KeyEventArgs e)
@@ -378,25 +378,25 @@ namespace PacmanGame_WinForms_
 
             if (Interval == IntervalConstVal)
             {
-                countdownMinute = MinuteConstVal; 
-                countdownSecond = SecondConstVal; 
-                TimeEnergiserActive = TimeEnergActConstVal; 
+                countdownMinute = MinuteConstVal;
+                countdownSecond = SecondConstVal;
+                TimeEnergiserActive = TimeEnergActConstVal;
             }
 
             else if (Interval < IntervalConstVal)
             {
-                countdownMinute = MinuteConstVal; 
-                countdownSecond = SecondConstVal - MinuteConstVal * 30; 
-                TimeEnergiserActive = TimeEnergActConstVal - TimeEnergActConstVal / 3; 
+                countdownMinute = MinuteConstVal;
+                countdownSecond = SecondConstVal - MinuteConstVal * 30;
+                TimeEnergiserActive = TimeEnergActConstVal - TimeEnergActConstVal / 3;
             }
 
             else if (Interval > IntervalConstVal)
             {
-                countdownMinute = MinuteConstVal * 2; 
-                countdownSecond = SecondConstVal - MinuteConstVal * 30; 
-                TimeEnergiserActive = TimeEnergActConstVal + TimeEnergActConstVal / 3; 
+                countdownMinute = MinuteConstVal * 2;
+                countdownSecond = SecondConstVal - MinuteConstVal * 30;
+                TimeEnergiserActive = TimeEnergActConstVal + TimeEnergActConstVal / 3;
             }
-        }             
+        }
 
         //void PacmanEatBonus()
         //{
@@ -480,7 +480,7 @@ namespace PacmanGame_WinForms_
 
             UpdateInfo();
 
-            Hero = CreatePanel();           
+            Hero = CreatePanel();
             Hero.BringToFront();
             Interface.UpdateHero();
         }
@@ -513,7 +513,7 @@ namespace PacmanGame_WinForms_
             }
 
             if (countdownMinute == 0 && countdownSecond == 0)
-            {               
+            {
                 label6.Text = $"Time left:\r\n0{countdownMinute}:{countdownSecond}\r\n\r\n";
                 YouFailed();
             }
@@ -525,19 +525,38 @@ namespace PacmanGame_WinForms_
 
         void GhostChasingWave()
         {
-            if (countdownSecond == timeForChasing)
-            {
-                GhostTeam.SetChaseMode(true);
-                timeForChasing = timeForChasing * 2 / 3;
+            Chase chase = new Chase();
+            Run run = new Run();
 
-                if (timeForChasing == 1)
+            if (countdownSecond == timeToChange)
+            {
+                GhostTeam[0].SetMovement(chase);
+                GhostTeam[0].executeStrategy();
+                GhostTeam[1].SetMovement(chase);
+                GhostTeam[1].executeStrategy();
+                GhostTeam[2].SetMovement(run);
+                GhostTeam[2].executeStrategy();
+                GhostTeam[3].SetMovement(run);
+                GhostTeam[3].executeStrategy();
+
+                timeToChange = timeToChange * 2 / 3;
+
+                if (timeToChange == 1)
                 {
-                    timeForChasing = IntervalConstVal / 2;
+                    timeToChange = IntervalConstVal / 2;
                 }
             }
             else if (countdownSecond == timeForRunning)
             {
-                GhostTeam.SetChaseMode(false);
+                GhostTeam[0].SetMovement(run);
+                GhostTeam[0].executeStrategy();
+                GhostTeam[1].SetMovement(run);
+                GhostTeam[1].executeStrategy();
+                GhostTeam[2].SetMovement(chase);
+                GhostTeam[2].executeStrategy();
+                GhostTeam[3].SetMovement(chase);
+                GhostTeam[3].executeStrategy();
+
                 timeForRunning = timeForRunning * 5 / 8;
 
                 if (timeForRunning == 1)
@@ -589,6 +608,6 @@ namespace PacmanGame_WinForms_
             }
 
             UpdateInfo();
-        }        
+        }
     }
 }
