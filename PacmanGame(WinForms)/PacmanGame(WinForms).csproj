@@ -219,6 +219,13 @@
     <Compile Include="Bonuses\PlusLiveBonus.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="DataBase.cs" />
+    <Compile Include="Decorator\IPacInfo.cs" />
+    <Compile Include="Decorator\PacInfo.cs" />
+    <Compile Include="Decorator\PacInfoDecorator.cs" />
+    <Compile Include="Decorator\PacLevelDecorator.cs" />
+    <Compile Include="Decorator\PacLivesDecorator.cs" />
+    <Compile Include="Decorator\PacScoreDecorator.cs" />
+    <Compile Include="Decorator\PacStepsDecorator.cs" />
     <Compile Include="Forms\LogInForm.cs">
       <SubType>Form</SubType>
     </Compile>
