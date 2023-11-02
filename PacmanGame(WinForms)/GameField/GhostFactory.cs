@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacmanGame_WinForms_.Bridge;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -18,21 +19,21 @@ namespace PacmanGame_WinForms_
 
             if (name.Equals("BLINKY"))
             {
-                return new Blinky();
+                return new Blinky(new SpeedUp());
 
             }
             else if (name.Equals("CLYDE"))
             {
-                return new Clyde();
+                return new Clyde(new SpeedDown());
 
             }
             else if (name.Equals("INKY"))
             {
-                return new Inky();
+                return new Inky(new SpeedUp());
             }
             else if (name.Equals("PINKY"))
             {
-                return new Pinky();
+                return new Pinky(new SpeedDown());
             }
 
             return null;

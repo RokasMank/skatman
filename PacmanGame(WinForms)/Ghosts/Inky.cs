@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacmanGame_WinForms_.Bridge;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
@@ -12,7 +13,7 @@ namespace PacmanGame_WinForms_
 
         private readonly Vector2 targetPoint = new Vector2(Controller.GetInstance().MapWidth - 2, Controller.GetInstance().MapHeight - 2);
 
-        public Inky() : base()
+        public Inky(ISpeedBehaviour speedBehaviour) : base(speedBehaviour)
         {
             Image = Properties.Resources.Inky_UP;
         }
@@ -50,6 +51,11 @@ namespace PacmanGame_WinForms_
                     Image = Properties.Resources.Inky_UP;
                     break;
             }
-        }       
+        }
+
+        public override void Speed()
+        {
+            _speedBehaviour.Speed(this, 50);
+        }
     }
 }

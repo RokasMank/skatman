@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacmanGame_WinForms_.Bridge;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
@@ -8,12 +9,12 @@ namespace PacmanGame_WinForms_
     class Clyde : Ghost
     {
         private Direction control = Direction.DOWN;
-        private int interval = Settings.Interval + 100;
+        private int interval = Settings.Interval;
 
         private readonly Vector2 targetPoint = new Vector2(1, Controller.GetInstance().MapHeight - 2);
 
 
-        public Clyde() : base()
+        public Clyde(ISpeedBehaviour speedBehaviour) : base(speedBehaviour)
         {
             Image = Properties.Resources.Clyde_D;
         }
@@ -49,6 +50,11 @@ namespace PacmanGame_WinForms_
                     Image = Properties.Resources.Clyde_UP;
                     break;
             }
+        }
+
+        public override void Speed()
+        {
+            _speedBehaviour.Speed(this, 30);
         }
     }
 }
