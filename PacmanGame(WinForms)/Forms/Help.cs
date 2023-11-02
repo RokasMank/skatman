@@ -12,18 +12,18 @@ namespace PacmanGame_WinForms_
 {
     public partial class Help : Form
     {
-        public Help()
+        internal IMenuCommand menuCommand;
+        public Help(IMenuCommand command)
         {
             InitializeComponent();
+            menuCommand = command;
         }
 
         private void Help_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Home)
+            if (e.KeyCode == Keys.Back)
             {
-                Program.Menu.help.BackColor = Color.Lime;
-                Program.Menu.help.ForeColor = SystemColors.ControlText;
-                Close();
+                menuCommand.Undo();
             }
         }
     }

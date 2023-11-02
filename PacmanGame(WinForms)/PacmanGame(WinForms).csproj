@@ -251,7 +251,13 @@
     <Compile Include="Ghosts\GhostTeam.cs" />
     <Compile Include="Ghosts\Inky.cs" />
     <Compile Include="GameField\SourceFile.cs" />
+    <Compile Include="OpenSettings.cs" />
+    <Compile Include="OpenResults.cs" />
+    <Compile Include="ExitApp.cs" />
+    <Compile Include="OpenTab.cs" />
+    <Compile Include="OpenHelp.cs" />
     <Compile Include="IEnergiserObserver.cs" />
+    <Compile Include="IMenuCommand.cs" />
     <Compile Include="Interface.cs" />
     <Compile Include="Pacman.cs" />
     <Compile Include="Ghosts\Pinky.cs" />

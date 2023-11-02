@@ -205,6 +205,7 @@
             this.Name = "Settings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
+            this.KeyPreview = true;
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Settings_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

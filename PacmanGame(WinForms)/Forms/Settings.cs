@@ -14,19 +14,19 @@ namespace PacmanGame_WinForms_
     public partial class Settings : Form
     {
         public static int Interval = 100;
+        internal IMenuCommand menuCommand;
 
-        public Settings()
+        public Settings(IMenuCommand command)
         {
             InitializeComponent();
+            menuCommand = command;
         }
 
         private void Settings_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Home)
+            if (e.KeyCode == Keys.Back)
             {
-                Program.Menu.settings.BackColor = Color.Lime;
-                Program.Menu.settings.ForeColor = SystemColors.ControlText;
-                Close();
+                menuCommand.Undo();
             }
         }
 
@@ -59,9 +59,7 @@ namespace PacmanGame_WinForms_
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Program.Menu.settings.BackColor = Color.Lime;
-            Program.Menu.settings.ForeColor = SystemColors.ControlText;
-            Close();
+            menuCommand.Undo();
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)

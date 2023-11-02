@@ -21,6 +21,23 @@ namespace PacmanGame_WinForms_
             };
         }
 
+        public static void OpenForm(Form form, bool setSettings = false)
+        {
+            form.ShowDialog();
+            if (setSettings)
+                Program.Set = (Settings)form;
+        }
+
+        public static void CloseForm(Form form)
+        {
+            form.Close();
+        }
+
+        public static void ExitApp()
+        {
+            Application.Exit();
+        }
+
         private void startGame_MouseUp(object sender, MouseEventArgs e)
         {
             Game Game = new Game();
@@ -30,25 +47,22 @@ namespace PacmanGame_WinForms_
 
         private void help_MouseUp(object sender, MouseEventArgs e)
         {
-            Help Help = new Help();
-            Help.ShowDialog();
+            new OpenHelp().Execute();
         }
 
         private void exit_MouseUp(object sender, MouseEventArgs e)
         {
-            Application.Exit();
+            new ExitApp().Execute();
         }
 
         private void settings_MouseUp(object sender, MouseEventArgs e)
         {
-            Program.Set = new Settings();
-            Program.Set.ShowDialog();
+            new OpenSettings().Execute();
         }
 
         private void resultBtn_Click(object sender, EventArgs e)
         {
-            Results res = new Results();
-            res.Show();
+            new OpenResults().Execute();
         }
         private async void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -80,6 +94,41 @@ namespace PacmanGame_WinForms_
                     listBox1.Items.Add(ex.Message);
                 });
             }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            var a = new TextBox();
+            switch (keyData)
+            {
+                case Keys.Enter:
+                    // Start Game
+                    PlaceholderMethod();
+                    return true;
+                case Keys.H:
+                    // Help
+                    new OpenHelp().Execute();
+                    return true;
+                case Keys.S:
+                    // Settings
+                    new OpenSettings().Execute();
+                    return true;
+                case Keys.R:
+                    // Results
+                    new OpenResults().Execute();
+                    return true;
+                case Keys.E:
+                    // Exit
+                    new ExitApp().Execute();
+                    return true;
+                default:
+                    return base.ProcessCmdKey(ref msg, keyData);
+            }
+        }
+
+        void PlaceholderMethod()
+        {
+            throw new NotImplementedException();
         }
 
         private async void button1_Click(object sender, EventArgs e)

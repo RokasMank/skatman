@@ -68,9 +68,10 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Berlin Sans FB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 19);
+            this.label1.Location = new System.Drawing.Point(16, 23);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(796, 98);
+            this.label1.Size = new System.Drawing.Size(1061, 121);
             this.label1.TabIndex = 0;
             this.label1.Text = resources.GetString("label1.Text");
             // 
@@ -78,18 +79,20 @@
             // 
             this.pictureBox1.BackgroundImage = global::PacmanGame_WinForms_.Properties.Resources.Pacman_R;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 120);
+            this.pictureBox1.Location = new System.Drawing.Point(16, 148);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(44, 50);
+            this.pictureBox1.Size = new System.Drawing.Size(59, 62);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Berlin Sans FB", 20.25F);
-            this.label2.Location = new System.Drawing.Point(62, 129);
+            this.label2.Location = new System.Drawing.Point(83, 159);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(138, 50);
+            this.label2.Size = new System.Drawing.Size(184, 62);
             this.label2.TabIndex = 2;
             this.label2.Text = "- Pac-Man";
             // 
@@ -97,9 +100,10 @@
             // 
             this.pictureBox2.BackgroundImage = global::PacmanGame_WinForms_.Properties.Resources.Coin;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 166);
+            this.pictureBox2.Location = new System.Drawing.Point(16, 204);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(44, 50);
+            this.pictureBox2.Size = new System.Drawing.Size(59, 62);
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 
@@ -107,9 +111,10 @@
             // 
             this.pictureBox3.BackgroundImage = global::PacmanGame_WinForms_.Properties.Resources.Energizer;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox3.Location = new System.Drawing.Point(12, 213);
+            this.pictureBox3.Location = new System.Drawing.Point(16, 262);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(44, 50);
+            this.pictureBox3.Size = new System.Drawing.Size(59, 62);
             this.pictureBox3.TabIndex = 4;
             this.pictureBox3.TabStop = false;
             // 
@@ -117,9 +122,10 @@
             // 
             this.pictureBox4.BackgroundImage = global::PacmanGame_WinForms_.Properties.Resources.Empty;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox4.Location = new System.Drawing.Point(11, 311);
+            this.pictureBox4.Location = new System.Drawing.Point(15, 383);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(44, 50);
+            this.pictureBox4.Size = new System.Drawing.Size(59, 62);
             this.pictureBox4.TabIndex = 5;
             this.pictureBox4.TabStop = false;
             // 
@@ -127,9 +133,10 @@
             // 
             this.pictureBox5.BackgroundImage = global::PacmanGame_WinForms_.Properties.Resources.Portal;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox5.Location = new System.Drawing.Point(11, 260);
+            this.pictureBox5.Location = new System.Drawing.Point(15, 320);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(45, 51);
+            this.pictureBox5.Size = new System.Drawing.Size(60, 63);
             this.pictureBox5.TabIndex = 6;
             this.pictureBox5.TabStop = false;
             // 
@@ -137,54 +144,60 @@
             // 
             this.pictureBox6.BackgroundImage = global::PacmanGame_WinForms_.Properties.Resources.Wall;
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox6.Location = new System.Drawing.Point(11, 360);
+            this.pictureBox6.Location = new System.Drawing.Point(15, 443);
+            this.pictureBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(44, 50);
+            this.pictureBox6.Size = new System.Drawing.Size(59, 62);
             this.pictureBox6.TabIndex = 7;
             this.pictureBox6.TabStop = false;
             // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Berlin Sans FB", 20.25F);
-            this.label3.Location = new System.Drawing.Point(62, 179);
+            this.label3.Location = new System.Drawing.Point(83, 220);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 50);
+            this.label3.Size = new System.Drawing.Size(99, 62);
             this.label3.TabIndex = 8;
             this.label3.Text = "- coin";
             // 
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Berlin Sans FB", 20.25F);
-            this.label4.Location = new System.Drawing.Point(62, 229);
+            this.label4.Location = new System.Drawing.Point(83, 282);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(129, 50);
+            this.label4.Size = new System.Drawing.Size(172, 62);
             this.label4.TabIndex = 9;
             this.label4.Text = "- energiser";
             // 
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Berlin Sans FB", 20.25F);
-            this.label5.Location = new System.Drawing.Point(62, 270);
+            this.label5.Location = new System.Drawing.Point(83, 332);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 50);
+            this.label5.Size = new System.Drawing.Size(129, 62);
             this.label5.TabIndex = 10;
             this.label5.Text = "- portal";
             // 
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Berlin Sans FB", 20.25F);
-            this.label6.Location = new System.Drawing.Point(62, 320);
+            this.label6.Location = new System.Drawing.Point(83, 394);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(168, 50);
+            this.label6.Size = new System.Drawing.Size(224, 62);
             this.label6.TabIndex = 11;
             this.label6.Text = "- empty point";
             // 
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("Berlin Sans FB", 20.25F);
-            this.label7.Location = new System.Drawing.Point(62, 370);
+            this.label7.Location = new System.Drawing.Point(83, 455);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(75, 50);
+            this.label7.Size = new System.Drawing.Size(100, 62);
             this.label7.TabIndex = 12;
             this.label7.Text = "- wall";
             // 
@@ -192,9 +205,10 @@
             // 
             this.pictureBox7.BackgroundImage = global::PacmanGame_WinForms_.Properties.Resources.Blinky_R;
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox7.Location = new System.Drawing.Point(332, 120);
+            this.pictureBox7.Location = new System.Drawing.Point(443, 148);
+            this.pictureBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(44, 50);
+            this.pictureBox7.Size = new System.Drawing.Size(59, 62);
             this.pictureBox7.TabIndex = 13;
             this.pictureBox7.TabStop = false;
             // 
@@ -202,9 +216,10 @@
             // 
             this.pictureBox8.BackgroundImage = global::PacmanGame_WinForms_.Properties.Resources.Clyde_UP;
             this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox8.Location = new System.Drawing.Point(382, 120);
+            this.pictureBox8.Location = new System.Drawing.Point(509, 148);
+            this.pictureBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(44, 50);
+            this.pictureBox8.Size = new System.Drawing.Size(59, 62);
             this.pictureBox8.TabIndex = 14;
             this.pictureBox8.TabStop = false;
             // 
@@ -212,9 +227,10 @@
             // 
             this.pictureBox9.BackgroundImage = global::PacmanGame_WinForms_.Properties.Resources.Inky_UP;
             this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox9.Location = new System.Drawing.Point(432, 120);
+            this.pictureBox9.Location = new System.Drawing.Point(576, 148);
+            this.pictureBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(42, 50);
+            this.pictureBox9.Size = new System.Drawing.Size(56, 62);
             this.pictureBox9.TabIndex = 15;
             this.pictureBox9.TabStop = false;
             // 
@@ -222,18 +238,20 @@
             // 
             this.pictureBox10.BackgroundImage = global::PacmanGame_WinForms_.Properties.Resources.Pinky_R;
             this.pictureBox10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox10.Location = new System.Drawing.Point(480, 120);
+            this.pictureBox10.Location = new System.Drawing.Point(640, 148);
+            this.pictureBox10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(44, 50);
+            this.pictureBox10.Size = new System.Drawing.Size(59, 62);
             this.pictureBox10.TabIndex = 16;
             this.pictureBox10.TabStop = false;
             // 
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("Berlin Sans FB", 20.25F);
-            this.label8.Location = new System.Drawing.Point(539, 129);
+            this.label8.Location = new System.Drawing.Point(719, 159);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(172, 50);
+            this.label8.Size = new System.Drawing.Size(229, 62);
             this.label8.TabIndex = 17;
             this.label8.Text = "- active ghosts";
             // 
@@ -241,18 +259,20 @@
             // 
             this.pictureBox11.BackgroundImage = global::PacmanGame_WinForms_.Properties.Resources.GrayGhost;
             this.pictureBox11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox11.Location = new System.Drawing.Point(396, 190);
+            this.pictureBox11.Location = new System.Drawing.Point(528, 234);
+            this.pictureBox11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(65, 80);
+            this.pictureBox11.Size = new System.Drawing.Size(87, 98);
             this.pictureBox11.TabIndex = 18;
             this.pictureBox11.TabStop = false;
             // 
             // label9
             // 
             this.label9.Font = new System.Drawing.Font("Berlin Sans FB", 20.25F);
-            this.label9.Location = new System.Drawing.Point(539, 204);
+            this.label9.Location = new System.Drawing.Point(719, 251);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(183, 50);
+            this.label9.Size = new System.Drawing.Size(244, 62);
             this.label9.TabIndex = 19;
             this.label9.Text = "- passive ghosts";
             // 
@@ -262,9 +282,10 @@
             this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label10.Font = new System.Drawing.Font("Berlin Sans FB", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.label10.Location = new System.Drawing.Point(309, 298);
+            this.label10.Location = new System.Drawing.Point(412, 367);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(260, 35);
+            this.label10.Size = new System.Drawing.Size(347, 43);
             this.label10.TabIndex = 20;
             this.label10.Text = "F5 - restart the Game\r\n";
             // 
@@ -273,9 +294,10 @@
             this.label11.BackColor = System.Drawing.Color.Red;
             this.label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label11.Font = new System.Drawing.Font("Berlin Sans FB", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(282, 342);
+            this.label11.Location = new System.Drawing.Point(376, 421);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(308, 68);
+            this.label11.Size = new System.Drawing.Size(411, 84);
             this.label11.TabIndex = 21;
             this.label11.Text = "Esc - quit from the Game\r\nbut then you\'ll lose\r\n\r\n";
             // 
@@ -285,18 +307,19 @@
             this.label12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label12.Font = new System.Drawing.Font("Berlin Sans FB", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Yellow;
-            this.label12.Location = new System.Drawing.Point(624, 298);
+            this.label12.Location = new System.Drawing.Point(832, 367);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(164, 112);
+            this.label12.Size = new System.Drawing.Size(219, 138);
             this.label12.TabIndex = 22;
-            this.label12.Text = "Home - return to the \r\nmain menu\r\n\r\n";
+            this.label12.Text = "Backspace - return to the \r\nmain menu\r\n\r\n";
             // 
             // Help
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Cyan;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -320,6 +343,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Help";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Help";

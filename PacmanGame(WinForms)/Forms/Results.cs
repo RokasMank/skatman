@@ -14,15 +14,15 @@ namespace PacmanGame_WinForms_.Forms
 {
     public partial class Results : Form
     {
-        public Results()
+        internal IMenuCommand menuCommand;
+        public Results(IMenuCommand ccommand)
         {
             InitializeComponent();
+            menuCommand = ccommand;
         }
 
         private void Results_Load(object sender, EventArgs e)
         {
-
-
             PrintResults();
         }
 
@@ -47,7 +47,15 @@ namespace PacmanGame_WinForms_.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Close();
+            menuCommand.Undo();
+        }
+
+        private void Results_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Back)
+            {
+                menuCommand.Undo();
+            }
         }
     }
 }
