@@ -13,7 +13,7 @@ namespace PacmanGame_WinForms_.Decorator
         {
         }
 
-        public string GetInfo(string info)
+        public string GetInfo()
         {
             return base.ToString();
         }

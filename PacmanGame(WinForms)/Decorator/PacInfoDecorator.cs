@@ -14,6 +14,6 @@ namespace PacmanGame_WinForms_.Decorator
             _pacInfo = pacInfo;
         }
 
-        public abstract string GetInfo(string info);
+        public abstract string GetInfo();
     }
 }

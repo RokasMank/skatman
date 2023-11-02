@@ -47,10 +47,10 @@ namespace PacmanGame_WinForms_
             label1.TabIndex = 0;
 
             IPacInfo pacInfo = new PacInfo();
-            var pacLevelDecorator = new PacLevelDecorator(pacInfo).GetInfo($"Level: {Level}");
-            var pacLivesDecorator = new PacLivesDecorator(pacInfo, $"Lives: {Lives}").GetInfo(pacLevelDecorator);
-            var pacScoreDecorator = new PacScoreDecorator(pacInfo, $"Score: {Score}").GetInfo(pacLivesDecorator);
-            var pacStepsDecorator = new PacStepsDecorator(pacInfo, $"Steps: {Steps}").GetInfo(pacScoreDecorator);
+            var pacLevelDecorator = new PacLevelDecorator(pacInfo, $"Level: {Level}");
+            var pacLivesDecorator = new PacLivesDecorator(pacLevelDecorator, $"Lives: {Lives}");
+            var pacScoreDecorator = new PacScoreDecorator(pacLivesDecorator, $"Score: {Score}");
+            var pacStepsDecorator = new PacStepsDecorator(pacScoreDecorator, $"Steps: {Steps}").GetInfo();
 
             label1.Text = pacStepsDecorator;
 

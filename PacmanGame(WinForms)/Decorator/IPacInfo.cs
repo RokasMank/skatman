@@ -8,6 +8,6 @@ namespace PacmanGame_WinForms_.Decorator
 {
     public interface IPacInfo
     {
-        string GetInfo(string info);
+        string GetInfo();
     }
 }
