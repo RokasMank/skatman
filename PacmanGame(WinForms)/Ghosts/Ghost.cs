@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacmanGame_WinForms_.Bridge;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
@@ -10,6 +11,7 @@ namespace PacmanGame_WinForms_
 {
     public abstract class Ghost : BasePoint, IEnergiserObserver
     {
+        protected ISpeedBehaviour _speedBehaviour;
         public bool passive = false;
         public bool _isEmpty = false;
         public bool pacmanHit = false;
@@ -20,7 +22,7 @@ namespace PacmanGame_WinForms_
         private readonly int respaunY;
         private bool energiserActive = false;
 
-        public Ghost() : base()
+        public Ghost(ISpeedBehaviour speedBehaviour) : base()
         {
             SetRandomPos();
 
@@ -29,7 +31,10 @@ namespace PacmanGame_WinForms_
 
             ChaseMode = false;
             FunkMode = false;
+            _speedBehaviour = speedBehaviour;
         }
+
+        public abstract void Speed();
 
         public abstract Direction Direction { get; set; }
         public abstract int Interval { get; set; }

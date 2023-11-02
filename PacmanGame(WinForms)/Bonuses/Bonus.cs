@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacmanGame_WinForms_.Bridge;
+using System;
 using System.Windows.Forms;
 
 namespace PacmanGame_WinForms_
@@ -9,8 +10,9 @@ namespace PacmanGame_WinForms_
 
         Direction control = Direction.LEFT;
         int interval = 500;
+        private static ISpeedBehaviour speedBehaviour;
 
-        public Bonus() : base()
+        public Bonus() : base(speedBehaviour)
         {
             SetRndTimeToAppear();
             _isEmpty = false;

@@ -1,4 +1,6 @@
-﻿namespace PacmanGame_WinForms_.Ghosts
+﻿using PacmanGame_WinForms_.Bridge;
+
+namespace PacmanGame_WinForms_.Ghosts
 {
     public class GhostFactory
     {
@@ -11,21 +13,21 @@
 
             if (name.Equals("BLINKY"))
             {
-                return new Blinky();
+                return new Blinky(new SpeedUp());
 
             }
             else if (name.Equals("CLYDE"))
             {
-                return new Clyde();
+                return new Clyde(new SpeedDown());
 
             }
             else if (name.Equals("INKY"))
             {
-                return new Inky();
+                return new Inky(new SpeedUp());
             }
             else if (name.Equals("PINKY"))
             {
-                return new Pinky();
+                return new Pinky(new SpeedDown());
             }
 
             return null;

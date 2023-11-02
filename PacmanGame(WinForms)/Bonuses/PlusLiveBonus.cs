@@ -32,5 +32,10 @@ namespace PacmanGame_WinForms_
         {
             Controller.GetInstance().ExtraLife();
         }
+
+        public override void Speed()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -49,5 +49,10 @@ namespace PacmanGame_WinForms_
                     break;
             }
         }
+
+        public override void Speed()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

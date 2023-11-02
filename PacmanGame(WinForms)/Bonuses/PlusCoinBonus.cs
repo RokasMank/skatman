@@ -32,5 +32,10 @@ namespace PacmanGame_WinForms_
         {
             Controller.GetInstance().PlusCoin();
         }
+
+        public override void Speed()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

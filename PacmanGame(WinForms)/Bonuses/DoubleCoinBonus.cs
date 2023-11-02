@@ -37,5 +37,10 @@ namespace PacmanGame_WinForms_
         {
             Game.Score *= 2;
         }
+
+        public override void Speed()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

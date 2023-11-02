@@ -217,6 +217,9 @@
     <Compile Include="Bonuses\MinusLiveBonus.cs" />
     <Compile Include="Bonuses\PlusBonusFactory.cs" />
     <Compile Include="Bonuses\PlusLiveBonus.cs" />
+    <Compile Include="Bridge\ISpeedBehaviour.cs" />
+    <Compile Include="Bridge\SpeedDown.cs" />
+    <Compile Include="Bridge\SpeedUp.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="DataBase.cs" />
     <Compile Include="Decorator\IPacInfo.cs" />
