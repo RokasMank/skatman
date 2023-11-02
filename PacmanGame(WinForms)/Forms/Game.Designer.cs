@@ -43,6 +43,7 @@
             // 
             // timer1
             // 
+            this.PacmanTimer.Interval = 20;
             this.PacmanTimer.Tick += new System.EventHandler(this.PacmanMoving);
             // 
             // label2

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacmanGame_WinForms_.Decorator;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -44,7 +45,14 @@ namespace PacmanGame_WinForms_
             label1.Name = "label1";
             label1.Size = new Size(169, 194);
             label1.TabIndex = 0;
-            label1.Text = $"Level: {Level}\r\nScore: {Score}\r\nSteps: {Steps}\r\nLives: {Lives}\r\n\r\n";
+
+            IPacInfo pacInfo = new PacInfo();
+            var pacLevelDecorator = new PacLevelDecorator(pacInfo, $"Level: {Level}");
+            var pacLivesDecorator = new PacLivesDecorator(pacLevelDecorator, $"Lives: {Lives}");
+            var pacScoreDecorator = new PacScoreDecorator(pacLivesDecorator, $"Score: {Score}");
+            var pacStepsDecorator = new PacStepsDecorator(pacScoreDecorator, $"Steps: {Steps}").GetInfo();
+
+            label1.Text = pacStepsDecorator;
 
             return label1;
         }
