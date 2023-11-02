@@ -74,6 +74,8 @@
             this.Load += new System.EventHandler(this.Results_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.KeyPreview = true;
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Results_KeyDown);
 
         }
 
