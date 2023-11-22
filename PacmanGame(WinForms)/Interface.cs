@@ -1,4 +1,5 @@
 ﻿using PacmanGame_WinForms_.Decorator;
+using PacmanGame_WinForms_.Proxy;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -60,7 +61,7 @@ namespace PacmanGame_WinForms_
         public static void UpdatePanel(BasePoint element)
         {
             Panel[,] GameMap = Game.GameMap;
-            Field Field = Game.Field;
+            IField Field = Game.Field;
 
             if (element != null)
             {

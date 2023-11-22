@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using PacmanGame_WinForms_.GameField;
 using PacmanGame_WinForms_.GameField.Builder;
+using PacmanGame_WinForms_.Proxy;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,13 +11,14 @@ using System.IO;
 
 namespace PacmanGame_WinForms_
 { 
-    public class Field
+    public class Field : IField
     {
+        public bool matrixIsCreated = false;
         public int Columns { get; set; }
         public int Rows { get; set; }
 
         public static int CoinsCount { get; set; }
-        public static BasePoint[,] Matrix { get; set; }
+        private static BasePoint[,] Matrix { get; set; }
 
         private SourceFile[] Source { get; set; }
 
@@ -29,7 +31,7 @@ namespace PacmanGame_WinForms_
             {
                 
                 LoadJson();
-                CreateMatrix();
+                CreateMatrix(FileReading());
             }
             catch
             {
@@ -85,14 +87,13 @@ namespace PacmanGame_WinForms_
         }
 
 
-        void CreateMatrix()
+        public void CreateMatrix(char[,] matrix)
         {
             this._coinBuilder = new CoinBuilder();
             this._energiserBuilder = new EnergiserBuilder();
 
-            CoinsCount = 0;           
+            CoinsCount = 0;
 
-            char[,] matrix = FileReading();
             Matrix = new BasePoint[Rows, Columns];
 
             for (int i = 0; i < matrix.GetLength(0); ++i)
@@ -127,7 +128,8 @@ namespace PacmanGame_WinForms_
                             break;
                     }
                 }
-            }           
-        }                
+            }
+            matrixIsCreated = true;
+        }
     }
 }

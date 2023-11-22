@@ -1,4 +1,5 @@
 ﻿using PacmanGame_WinForms_.Bonuses;
+using PacmanGame_WinForms_.Proxy;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -42,7 +43,7 @@ namespace PacmanGame_WinForms_
 
         public static int ElementSize { get; set; }
 
-        public static Field Field;
+        public static IField Field;
         public static Pacman Pacman;
         public static Pacman PacmanTwo = new Pacman(9,13);
 
@@ -79,7 +80,7 @@ namespace PacmanGame_WinForms_
 
         void InitializeGameElem()
         {
-            Field = new Field();
+            Field = new FieldBackupProxy();
             GhostTeam = new GhostTeam();
             foreach (var ghost in GhostTeam.List)
             {
