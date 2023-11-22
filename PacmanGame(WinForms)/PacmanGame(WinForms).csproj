@@ -305,7 +305,7 @@
     <Compile Include="Forms\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Proxy\FieldWithBackup.cs" />
+    <Compile Include="Proxy\FieldBackupProxy.cs" />
     <Compile Include="Proxy\IField.cs" />
     <Compile Include="Sounds.cs" />
     <Compile Include="Strategy\Chase.cs" />
