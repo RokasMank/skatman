@@ -1,19 +1,23 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using PacmanGame_WinForms_.Forms;
+using PacmanGame_WinForms_.Mediator;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PacmanGame_WinForms_
 {
-    public partial class Menu : Form
+    public partial class Menu : Form, IColleague
     {
+        private IMenuMediator mediator;
         HubConnection hubConnection;
         public Menu()
         {
             InitializeComponent();
             hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:53353/chathub").Build();
-
+            
+           // mediator = new GameMediator();
+            //mediator.RegisterChatParticipant(this);
             hubConnection.Closed += async (error) =>
             {
                 await Task.Delay(new Random().Next(0, 5) * 1000);
@@ -40,6 +44,7 @@ namespace PacmanGame_WinForms_
 
         private void startGame_MouseUp(object sender, MouseEventArgs e)
         {
+            
             Game Game = new Game();
             Game.Show();
             
@@ -130,11 +135,24 @@ namespace PacmanGame_WinForms_
         {
             throw new NotImplementedException();
         }
+        //public void SetMediator(IMeniuMediator mediator)
+        //{
+        //   // chatMediator = mediator;
+        //  //  chatMediator.RegisterChatParticipant(this);
+        //}
 
+        public void ReceiveMessage(string user, string message)
+        {
+            var newMessage = $"{user}: {message}";
+            listBox1.Invoke((MethodInvoker)delegate {
+                listBox1.Items.Add(newMessage);
+            });
+        }
         private async void button1_Click(object sender, EventArgs e)
         {
             try
             {
+                //mediator.SendMessage(textBox2.Text, textBox1.Text);
                 await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
             }
             catch (Exception ex)
@@ -144,6 +162,16 @@ namespace PacmanGame_WinForms_
                     listBox1.Items.Add(ex.Message);
                 });
             }
+        }
+
+        public void ReceiveMessage(string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SendMessage(string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

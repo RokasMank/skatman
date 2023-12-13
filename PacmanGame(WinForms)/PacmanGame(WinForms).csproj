@@ -265,6 +265,12 @@
     <Compile Include="Ghosts\GhostTeam.cs" />
     <Compile Include="Ghosts\Inky.cs" />
     <Compile Include="GameField\SourceFile.cs" />
+    <Compile Include="Iterator\BonusIterator.cs" />
+    <Compile Include="Iterator\GhostIterator.cs" />
+    <Compile Include="Iterator\IIterator.cs" />
+    <Compile Include="Mediator\GameMediator.cs" />
+    <Compile Include="Mediator\IColleague.cs" />
+    <Compile Include="Mediator\IMenuMediator.cs" />
     <Compile Include="OpenSettings.cs" />
     <Compile Include="OpenResults.cs" />
     <Compile Include="ExitApp.cs" />
@@ -306,6 +312,11 @@
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="Sounds.cs" />
+    <Compile Include="State\ExtraboostState.cs" />
+    <Compile Include="State\HitByGhostState.cs" />
+    <Compile Include="State\IPacManState.cs" />
+    <Compile Include="State\NormalState.cs" />
+    <Compile Include="State\PacmanPauseState.cs" />
     <Compile Include="Strategy\Chase.cs" />
     <Compile Include="Strategy\Movement.cs" />
     <Compile Include="Strategy\Run.cs" />
@@ -481,7 +492,12 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\pac123.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

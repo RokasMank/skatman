@@ -1,4 +1,5 @@
 ﻿using PacmanGame_WinForms_.Forms;
+using PacmanGame_WinForms_.Mediator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,9 @@ namespace PacmanGame_WinForms_
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+           
+          //  IMenuMediator mediator = new GameMediator(chatWindow);
+          
             Menu = new Menu();
             //Application.Run(Menu);
             Application.Run(new Menu());

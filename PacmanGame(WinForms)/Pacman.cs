@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using PacmanGame_WinForms_.State;
 
 namespace PacmanGame_WinForms_
 {
@@ -11,34 +12,52 @@ namespace PacmanGame_WinForms_
         public bool GhostHit = false;
         public bool PortalOpened = false;
         public Direction Direction = Direction.UP;
-        private Direction nextDirection = 0;
-
+        public Direction nextDirection = 0;
+        private IPacManState _currentState;
+        //do states
 
         public Pacman(int x, int y) : base(x, y)
         {
             Image = Properties.Resources.Pacman_R;
+            _currentState = new NormalState(this);
+        }
+        // New method to set the state (for example, when hit by a ghost)
+        public void SetState(IPacManState state)
+        {
+            _currentState = state;
         }
 
+        // New method to get the current state
+        public IPacManState GetState()
+        {
+            return _currentState;
+        }
+        public void ExtraBoost()
+        {
+            _currentState = new ExtraboostState(this);
+            //_currentState.Move();
+        }
         public void Move()
         {
-            GhostHit = false;
+            _currentState.Move();
+            //GhostHit = false;
 
-            if (CheckPoint(nextDirection))
-            {
-                GetNextPoint(nextDirection);
-                ++Game.Steps;
+            //if (CheckPoint(nextDirection))
+            //{
+            //    GetNextPoint(nextDirection);
+            //    ++Game.Steps;
 
-                Direction = nextDirection;
-                nextDirection = 0;               
-            }
+            //    Direction = nextDirection;
+            //    nextDirection = 0;               
+            //}
 
-            if (CheckPoint(Direction) && Direction != nextDirection)
-            {
-                GetNextPoint(Direction);
-                ++Game.Steps;              
-            }
+            //if (CheckPoint(Direction) && Direction != nextDirection)
+            //{
+            //    GetNextPoint(Direction);
+            //    ++Game.Steps;              
+            //}
 
-            Controller.GetInstance().PacmanHitGhost(X, Y);
+            //Controller.GetInstance().PacmanHitGhost(X, Y);
         }
 
         private void ChangeImage(Direction direction)
@@ -62,7 +81,7 @@ namespace PacmanGame_WinForms_
 
         
 
-        void GetNextPoint(Direction direction)
+        public void GetNextPoint(Direction direction)
         {
             switch (direction)
             {
@@ -133,7 +152,7 @@ namespace PacmanGame_WinForms_
             ChangeImage(Direction);
         }
 
-        private bool CheckPoint(Direction direction)
+        public bool CheckPoint(Direction direction)
         {
             switch (direction)
             {

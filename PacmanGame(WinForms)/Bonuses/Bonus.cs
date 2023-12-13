@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace PacmanGame_WinForms_
 {
-    abstract class Bonus : Ghost
+    public abstract class Bonus : Ghost
     {
         public bool Active = false;      
 

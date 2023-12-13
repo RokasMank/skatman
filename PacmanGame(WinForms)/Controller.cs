@@ -1,4 +1,6 @@
 ﻿using PacmanGame_WinForms_.Forms;
+using PacmanGame_WinForms_.Iterator;
+using PacmanGame_WinForms_.State;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -144,24 +146,45 @@ namespace PacmanGame_WinForms_
 
         public void PacmanHitGhost(int x, int y)
         {
-            var list = Game.GhostTeam;
+            //IIterator<Ghost> iterator = new GhostIterator(Game.GhostTeam);
 
-            for (int i = 0; i < list.List.Count; ++i)
+            //while (iterator.hasNext())
+            //{
+            //    var ghost = iterator.next();
+
+            //    if (ghost.passive && x == ghost.X && y == ghost.Y && !ghost.pacmanHit)
+            //    {
+            //        ghost.pacmanHit = false;
+            //        Game.Pacman.GhostHit = true;
+            //        ghost.Action();
+            //        Interface.UpdateEnemy(ghost, ghost.IndexOf(ghost));
+            //        Game.UpdateInfo();
+            //    }
+
+            //}
+            IIterator<Ghost> iterator = new GhostIterator(Game.GhostTeam);
+
+            while (iterator.HasNext())
             {
-                if (list[i].passive)
-                {
-                    if (x == list[i].X && y == list[i].Y && !list[i].pacmanHit)
-                    {
-                        list[i].pacmanHit = false;
-                        Game.Pacman.GhostHit = true;
-                        list[i].Action();
-                        Interface.UpdateEnemy(list[i], i);
-                        Game.UpdateInfo();
-                    }
-                }
-            }
-        }
+                var (index, ghost) = iterator.Next();
 
+                if (ghost.passive && x == ghost.X && y == ghost.Y && !ghost.pacmanHit)
+                {
+                    //Game.Pacman.SetState(new HitByGhostState(Game.Pacman));
+                    ghost.pacmanHit = false;
+                    Game.Pacman.GhostHit = true;
+                    ghost.Action();
+                    Interface.UpdateEnemy(ghost, index);
+                    Game.UpdateInfo();
+                }
+                //Game.Pacman.SetState(new NormalState(Game.Pacman));
+            }
+        
+    }
+        //   var list = Game.GhostTeam; //iteratorius // per dvi strukturas(lista ir hashmap pvz, netinka list ir masyvas pvz) arba per viena struktura bet dviem skirtingais būdais (nuo didžiausio iki maziausio pvz ir paprastai)
+
+        // for (int i = 0; i < list.List.Count; ++i)
+        // {
         public bool PacmanCanMove(int y, int x)
         {
             if (IndexOutOfRange(y, x))
@@ -181,21 +204,24 @@ namespace PacmanGame_WinForms_
 
             {               
                 Game.Energisers.Add((Energiser)((Energiser)(matrix[y, x])).DeepClone(Game.TimeEnergiserActive));
-               // Game.Energisers.Add(new Energiser(x, y, Game.TimeEnergiserActive));
+               
                 Energiser prototype = new Energiser(x, y, Game.TimeEnergiserActive);
+                Energiser shallowClone = (Energiser)prototype.Clone();
                 Energiser deepClone = (Energiser)prototype.DeepClone(Game.TimeEnergiserActive);
 
-                // Returns 'false' => the original instance was successfully copied to a new instance, ...
+                Game.Pacman.SetState(new ExtraboostState(Game.Pacman));
                 bool isTheSameInstance = object.ReferenceEquals(prototype, deepClone);
+
+                isTheSameInstance = object.ReferenceEquals(prototype, shallowClone);
+                isTheSameInstance = object.ReferenceEquals(prototype.Image, shallowClone.Image); 
                 
-                // ...and also the data is not the same => deep copy or deep clone
-                isTheSameInstance = object.ReferenceEquals(prototype.Image, deepClone.Image); // false
+                isTheSameInstance = object.ReferenceEquals(prototype.Image, deepClone.Image); 
                 
 
                 // No active energisers before, ghosts stop chasing
                 if (Game.Energisers.Count == 1)
                     Controller.GetInstance().NotifyEnergiserObservers();
-
+                
                 return true;
             }
 

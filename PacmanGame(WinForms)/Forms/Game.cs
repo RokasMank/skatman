@@ -1,8 +1,13 @@
 ﻿using PacmanGame_WinForms_.Bonuses;
+using PacmanGame_WinForms_.Iterator;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using PacmanGame_WinForms_.Forms;
+using PacmanGame_WinForms_.Iterator;
+using PacmanGame_WinForms_.State;
+using System.Xml.Linq;
 
 namespace PacmanGame_WinForms_
 {
@@ -12,7 +17,6 @@ namespace PacmanGame_WinForms_
         public static Timer ClydeTimer;
         public static Timer InkyTimer;
         public static Timer PinkyTimer;
-
 
         public static int countdownMinute { get; set; }
         public static int countdownSecond { get; set; }
@@ -44,7 +48,7 @@ namespace PacmanGame_WinForms_
 
         public static Field Field;
         public static Pacman Pacman;
-        public static Pacman PacmanTwo = new Pacman(9,13);
+        //public static Pacman PacmanTwo = new Pacman(9,13);
 
         public static GhostTeam GhostTeam;
 
@@ -70,20 +74,24 @@ namespace PacmanGame_WinForms_
 
         static int timeToChange = IntervalConstVal / 2;
         static int timeForRunning = IntervalConstVal * 2 / 5;
-
+       
         public Game()
         {
+            
             InitializeGameElem();
             InitializeComponent();
         }
+       
 
         void InitializeGameElem()
         {
             Field = new Field();
             GhostTeam = new GhostTeam();
-            foreach (var ghost in GhostTeam.List)
+            IIterator<Ghost> iterator = new GhostIterator(GhostTeam);
+
+            while (iterator.HasNext())
             {
-                Controller.GetInstance().AttachEnergiserObserver(ghost);
+                Controller.GetInstance().AttachEnergiserObserver(iterator.Next().Item);
             }
 
             PlusLiveBonus = pliusbonusFactory.GetBonus("Live");
@@ -109,54 +117,87 @@ namespace PacmanGame_WinForms_
 
             SetTimer();
         }
+        private bool isPaused = false;
 
         private void GameKeyDown(object sender, KeyEventArgs e)
         {
             label5.Text = $"Last key pressed: {e.KeyData}";
-
-            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
+            if (!isPaused)
             {
-                Pacman.ChangeDirection(e);
-                PacmanTwo.ChangeDirection(e);
-
-            }
-
-            else if (e.KeyCode == Keys.F5)
-            {
-                if (Field.Finish() && Level == MaxLevel)
+                if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
                 {
-                    YouWin.Dispose();
+                    Pacman.ChangeDirection(e);
+                    //PacmanTwo.ChangeDirection(e);
+
                 }
 
-                else if (gameOver)
+                else if (e.KeyCode == Keys.F5)
                 {
-                    GameOver.Dispose();
-                    BackColor = SystemColors.Window;
-                    gameOver = false;
+                    if (Field.Finish() && Level == MaxLevel)
+                    {
+                        YouWin.Dispose();
+                    }
+
+                    else if (gameOver)
+                    {
+                        GameOver.Dispose();
+                        BackColor = SystemColors.Window;
+                        gameOver = false;
+                    }
+
+                    else
+                    {
+                        ClearForm();
+                    }
+
+                    RestartGame();
                 }
 
-                else
+                else if (e.KeyCode == Keys.Escape)
                 {
-                    ClearForm();
+                    YouFailed();
                 }
 
-                RestartGame();
+                else if (e.KeyCode == Keys.Home)
+                {
+                    Interface.ChangeColorBtn();
+                    Close();
+                }
+                else if (e.KeyCode == Keys.P)
+                {
+                    // Pause the game
+                    Pacman.SetState(new PacmanPauseState(Pacman, this));
+                    Pacman.Move();
+                    PauseGame();
+                }
             }
-
-            else if (e.KeyCode == Keys.Escape)
+            else
             {
-                YouFailed();
+                // Handle resume logic if needed
+                if (e.KeyCode == Keys.Space)
+                {
+                    ResumeGame();
+                    this.BackColor = Color.White;
+                    Pacman.SetState(new NormalState(Pacman));
+                }
             }
-
-            else if (e.KeyCode == Keys.Home)
-            {
-                Interface.ChangeColorBtn();
-                Close();
-            }
-
             Interface.UpdateHero();
         }
+        private void PauseGame()
+        {
+            isPaused = true;
+            // You can add additional logic here for pausing the game (e.g., stop animations, timers, etc.).
+            RemoveEachTimer();
+            BonusTimer.Stop();
+        }
 
+        private void ResumeGame()
+        {
+            isPaused = false;
+            // You can add additional logic here for resuming the game.
+            EnableEachTimer();
+            BonusTimer.Start();
+        }
         private void RestartGame()
         {
             InitializeGameElem();
@@ -179,7 +220,7 @@ namespace PacmanGame_WinForms_
         private void PacmanMoving(object sender, EventArgs e)
         {
             Pacman.Move();
-            PacmanTwo.Move();
+            //PacmanTwo.Move();
             //PacmanEatBonus();
 
             Interface.UpdateHero();
@@ -207,44 +248,66 @@ namespace PacmanGame_WinForms_
 
         private void BlinkyMoving(object sender, EventArgs e)
         {
-            GhostMoving(0);
+            if (!isPaused)
+            {
+                GhostMoving(0);
+            }
         }
 
         private void ClydeMoving(object sender, EventArgs e)
         {
-            GhostMoving(3);
+            if (!isPaused)
+            {
+                GhostMoving(3);
+            }
         }
 
         private void InkyMoving(object sender, EventArgs e)
         {
-            GhostMoving(2);
+            if (!isPaused)
+            {
+                GhostMoving(2);
+            }
         }
 
         private void PinkyMoving(object sender, EventArgs e)
         {
-            GhostMoving(1);
+            if (!isPaused)
+            {
+                GhostMoving(1);
+            }
         }
 
         void GhostMoving(int index)
         {
-            GhostTeam[index].Move();
-            GhostTeam[index].ChooseBehaviour();
-            RemoveEnergiser();
+            if (!isPaused)
+            {
+                GhostTeam[index].Move();
+                GhostTeam[index].ChooseBehaviour();
+                RemoveEnergiser();
 
-            Interface.UpdateEnemy(GhostTeam[index], index);
+                Interface.UpdateEnemy(GhostTeam[index], index);
+            }
         }
 
         private void BonusMoving(object sender, EventArgs e)
         {
-            for (int i = 0; i < BonusList.Count; ++i)
+            if (!isPaused)
             {
-                var b = BonusList[i];
+                IIterator<Bonus> bonusIterator = new BonusIterator(BonusList);
 
-                if (b.Active)
+                while (bonusIterator.HasNext())
                 {
-                    b.Move();
-                    PacmanEatBonus(b);
-                    Interface.UpdateBonus(b, b.Panel);
+                    var bonus = bonusIterator.Next().Item;
+
+                    if (bonus.Active)
+                    {
+
+                        bonus.Move();
+                        PacmanEatBonus(bonus);
+                        Interface.UpdateBonus(bonus, bonus.Panel);
+
+                    }
                 }
             }
         }
@@ -445,7 +508,7 @@ namespace PacmanGame_WinForms_
 
         void RemoveEnergiser()
         {
-            bool activeEnergiserExisted = Game.Energisers.Count > 0;
+            bool activeEnergiserExisted = Game.Energisers.Count > 0; // iterator
             for (int i = 0; i < Energisers.Count; ++i)
             {
                 if (Energisers[i].ReadyToStop(Energisers[i].Time))
@@ -455,7 +518,10 @@ namespace PacmanGame_WinForms_
             }
             // No active energisers left after removal, ghosts start chasing
             if (activeEnergiserExisted && Game.Energisers.Count == 0)
+            {
+                Game.Pacman.SetState(new NormalState(Pacman));
                 Controller.GetInstance().NotifyEnergiserObservers();
+            }
         }
 
         private void SetGameField()
