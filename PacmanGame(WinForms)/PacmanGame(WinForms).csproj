@@ -277,6 +277,10 @@
     <Compile Include="Ghosts\GhostTeam.cs" />
     <Compile Include="Ghosts\Inky.cs" />
     <Compile Include="GameField\SourceFile.cs" />
+    <Compile Include="Interpreter\DownExpression.cs" />
+    <Compile Include="Interpreter\Expression.cs" />
+    <Compile Include="Interpreter\UpDownExpression.cs" />
+    <Compile Include="Interpreter\UpExpression.cs" />
     <Compile Include="OpenSettings.cs" />
     <Compile Include="OpenResults.cs" />
     <Compile Include="ExitApp.cs" />
