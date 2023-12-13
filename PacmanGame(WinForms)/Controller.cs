@@ -13,6 +13,8 @@ namespace PacmanGame_WinForms_
 {
     class Controller
     {
+        public static Game game;
+
         private static Controller instance;
         
         private static object threadLock = new object();
@@ -36,10 +38,7 @@ namespace PacmanGame_WinForms_
 
         private List<IEnergiserObserver> EnergiserObservers = new List<IEnergiserObserver>();
 
-        public int MapHeight = Game.Field.Rows;
-        public int MapWidth = Game.Field.Columns;
 
-        public int LevelMax = Game.MaxLevel;
 
         public void AttachEnergiserObserver(IEnergiserObserver observer)
         {
@@ -61,12 +60,12 @@ namespace PacmanGame_WinForms_
 
         public Vector2 GetPacmanPos()
         {
-            return new Vector2(Game.Pacman.X, Game.Pacman.Y);
+            return new Vector2(game.Pacman.X, game.Pacman.Y);
         }
 
         public void MakeEmpty(int y, int x)
         {
-            Game.Field[y, x] = new EmptyPoint(x, y);
+            game.Field[y, x] = new EmptyPoint(x, y);
         }
 
         public void PacmanEatPoint()
@@ -76,32 +75,32 @@ namespace PacmanGame_WinForms_
 
         public bool CheckRndPos(int x, int y)
         {
-            return Game.Field[y, x] is Wall || Game.Field[y, x - 1] is Wall && Game.Field[y, x + 1] is Wall;
+            return game.Field[y, x] is Wall || game.Field[y, x - 1] is Wall && game.Field[y, x + 1] is Wall;
         }
 
         public bool PacmanHit(int x, int y)//
         {
-            return x == Game.Pacman.X && y == Game.Pacman.Y && !Game.Pacman.GhostHit;
+            return x == game.Pacman.X && y == game.Pacman.Y && !game.Pacman.GhostHit;
         }
 
         public bool GhostHit(int x, int y)
         {
-            return x == Game.Pacman.X && y == Game.Pacman.Y;
+            return x == game.Pacman.X && y == game.Pacman.Y;
         }
 
         public bool PacmanEatBonus(int x, int y)
         {
-            return x == Game.Pacman.X && y == Game.Pacman.Y;
+            return x == game.Pacman.X && y == game.Pacman.Y;
         }
 
         public bool CheckFieldLimit(int y, int x)
         {
-            return x > 0 && x < MapWidth && y > 0 && y < MapHeight;
+            return x > 0 && x < game.Field.Columns && y > 0 && y < game.Field.Rows;
         }
 
         bool IndexOutOfRange(int y, int x)
         {
-            return x < 0 || x >= MapWidth || y < 0 || y >= MapHeight;
+            return x < 0 || x >= game.Field.Columns || y < 0 || y >= game.Field.Rows;
         }
 
         public bool GhostCheckWall(int y, int x)
@@ -110,15 +109,15 @@ namespace PacmanGame_WinForms_
             {
                 return false;
             }
-            return Game.Field[y, x] is Wall;
+            return game.Field[y, x] is Wall;
         }
 
         public Vector2 PacmanFuturePos(int length)
         {
-            int x = Game.Pacman.X;
-            int y = Game.Pacman.Y;
+            int x = game.Pacman.X;
+            int y = game.Pacman.Y;
 
-            switch (Game.Pacman.Direction)
+            switch (game.Pacman.Direction)
             {
                 case Direction.LEFT:
                     x -= length;
@@ -139,12 +138,14 @@ namespace PacmanGame_WinForms_
 
         public void MinusLife()
         {
-            Game.Lives -= 1;
+            game.Lives -= 1;
         }
 
         public void PacmanHitGhost(int x, int y)
         {
-            var list = Game.GhostTeam;
+            if (game is GameEasyMode)
+                return;
+            var list = game.GhostTeam;
 
             for (int i = 0; i < list.List.Count; ++i)
             {
@@ -153,10 +154,10 @@ namespace PacmanGame_WinForms_
                     if (x == list[i].X && y == list[i].Y && !list[i].pacmanHit)
                     {
                         list[i].pacmanHit = false;
-                        Game.Pacman.GhostHit = true;
+                        game.Pacman.GhostHit = true;
                         list[i].Action();
                         Interface.UpdateEnemy(list[i], i);
-                        Game.UpdateInfo();
+                        game.UpdateInfo();
                     }
                 }
             }
@@ -169,21 +170,21 @@ namespace PacmanGame_WinForms_
                 return false;
             }
 
-            var matrix = Game.Field;
+            var matrix = game.Field;
 
             if (matrix[y, x] is Wall && matrix[y, x].Portal)
             {
-                Game.Pacman.PortalOpened = true;
+                game.Pacman.PortalOpened = true;
                 return true;
             }
 
             if (matrix[y, x] is Energiser)
 
             {               
-                Game.Energisers.Add((Energiser)((Energiser)(matrix[y, x])).DeepClone(Game.TimeEnergiserActive));
-               // Game.Energisers.Add(new Energiser(x, y, Game.TimeEnergiserActive));
-                Energiser prototype = new Energiser(x, y, Game.TimeEnergiserActive);
-                Energiser deepClone = (Energiser)prototype.DeepClone(Game.TimeEnergiserActive);
+                game.Energisers.Add((Energiser)((Energiser)(matrix[y, x])).DeepClone(game.TimeEnergiserActive));
+               // game.Energisers.Add(new Energiser(x, y, game.TimeEnergiserActive));
+                Energiser prototype = new Energiser(x, y, game.TimeEnergiserActive);
+                Energiser deepClone = (Energiser)prototype.DeepClone(game.TimeEnergiserActive);
 
                 // Returns 'false' => the original instance was successfully copied to a new instance, ...
                 bool isTheSameInstance = object.ReferenceEquals(prototype, deepClone);
@@ -193,7 +194,7 @@ namespace PacmanGame_WinForms_
                 
 
                 // No active energisers before, ghosts stop chasing
-                if (Game.Energisers.Count == 1)
+                if (game.Energisers.Count == 1)
                     Controller.GetInstance().NotifyEnergiserObservers();
 
                 return true;
@@ -214,29 +215,29 @@ namespace PacmanGame_WinForms_
 
         public void PlusCoin()
         {
-            Game.Score += Game.Score / 2;
+            game.Score += game.Score / 2;
         }
 
         public void ExtraLife()
         {
-            Game.Lives += 1;
+            game.Lives += 1;
         }
 
         public void DoubleScore()
         {
-            Game.Score *= 2;
+            game.Score *= 2;
         }
 
         public int[,] FillLogicMap()
         {
-            int[,] grid = new int[MapHeight, MapWidth];
+            int[,] grid = new int[game.Field.Rows, game.Field.Columns];
             const int wall = -10;
             const int blank = -1;
 
-            var matrix = Game.Field;
-            for (int i = 0; i < MapHeight; ++i)
+            var matrix = game.Field;
+            for (int i = 0; i < game.Field.Rows; ++i)
             {
-                for (int j = 0; j < MapWidth; ++j)
+                for (int j = 0; j < game.Field.Columns; ++j)
                 {
                     if (matrix[i, j] is Wall)
                     {
@@ -255,16 +256,16 @@ namespace PacmanGame_WinForms_
         public void SaveResult(string st)
         {
             var user = LogInForm.User;
-            var score = Game.Score;
+            var score = game.Score;
             var state = st;
-            var level = Game.Level;
-            var steps = Game.Steps;
+            var level = game.Level;
+            var steps = game.Steps;
 
             string totalTime;
-            if (Game.spentSecond > 9)
-                totalTime = $"0{Game.spentMinute}:{Game.spentSecond}";
+            if (game.spentSecond > 9)
+                totalTime = $"0{game.spentMinute}:{game.spentSecond}";
             else
-                totalTime = $"0{Game.spentMinute}:0{Game.spentSecond}";
+                totalTime = $"0{game.spentMinute}:0{game.spentSecond}";
 
 
 

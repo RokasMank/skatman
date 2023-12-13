@@ -30,12 +30,12 @@ namespace PacmanGame_WinForms_
 
         public override void GetScore()
         {
-            Game.Score *= 2;
+            game.Score *= 2;
         }
 
         public static void DoubleScore()
         {
-            Game.Score *= 2;
+            game.Score *= 2;
         }
 
         public override void Speed()

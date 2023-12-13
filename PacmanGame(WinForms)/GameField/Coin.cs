@@ -24,7 +24,7 @@ namespace PacmanGame_WinForms_
         public override void GetScore()
         {
             Controller.GetInstance().PacmanEatPoint();
-            Game.Score += 10;
+            game.Score += 10;
         }
     }
 }

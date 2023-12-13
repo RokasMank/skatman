@@ -8,11 +8,13 @@ namespace PacmanGame_WinForms_
 {
     public class GhostTeam
     {
+        public static Game game;
         internal List<Ghost> List = new List<Ghost>();          
 
         private GhostFactory GhostFactory = new GhostFactory();
-        public GhostTeam()
+        public GhostTeam(Game _game)
         {
+            game = _game;
             CreateList();
         }
 
@@ -39,7 +41,7 @@ namespace PacmanGame_WinForms_
                     {
                         List[i].Respaun();
 
-                        Game.GhostTeamPanel[i] = new Panel()
+                        game.GhostTeamPanel[i] = new Panel()
                         {
                             BackgroundImageLayout = ImageLayout.Stretch
                         };

@@ -1,5 +1,4 @@
 ﻿using PacmanGame_WinForms_.Bonuses;
-using PacmanGame_WinForms_.ChainOfResponsibility;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,60 +6,27 @@ using System.Windows.Forms;
 
 namespace PacmanGame_WinForms_
 {
-    public partial class Game : Form
+    public partial class GameEasyMode : Game
     {
-        public Timer BlinkyTimer;
-        public Timer ClydeTimer;
-        public Timer InkyTimer;
-        public Timer PinkyTimer;
 
-        AbstractHandler handler = new BlinkyHandler();
-        public static int countdownMinute { get; set; }
-        public static int countdownSecond { get; set; }
+        static List<Timer> TimerList = new List<Timer>();
 
-        List<Timer> TimerList = new List<Timer>();
+        private static BonusFactory minusbonusFactory = FactoryProducer.getFactory(true);
+        private static BonusFactory pliusbonusFactory = FactoryProducer.getFactory(false);
+        private static Bonus PlusLiveBonus { get; set; }
+        private static Bonus MinusLiveBonus { get; set; }
+        private static Bonus DoubleCoinBonus { get; set; }
+        private static Bonus PlusCoinBonus { get; set; }
+        private static Bonus Surprise { get; set; }
 
-        public int spentMinute { get; set; }
-        public int spentSecond { get; set; }
-
-        private BonusFactory minusbonusFactory = FactoryProducer.getFactory(true);
-        private BonusFactory pliusbonusFactory = FactoryProducer.getFactory(false);
-        private Bonus PlusLiveBonus { get; set; }
-        private Bonus MinusLiveBonus { get; set; }
-        private Bonus DoubleCoinBonus { get; set; }
-        private Bonus PlusCoinBonus { get; set; }
-        private Bonus Surprise { get; set; }
-
-        private List<Panel> BonusListPanel = new List<Panel>();
-        private List<Bonus> BonusList = new List<Bonus>();
-
-        public Panel[,] GameMap { get; set; }
-        public Panel Hero { get; set; }
-        private Panel YouWin { get; set; }
-        private Panel GameOver { get; set; }
+        private static List<Panel> BonusListPanel = new List<Panel>();
+        private static List<Bonus> BonusList = new List<Bonus>();
+        private static Panel YouWin { get; set; }
+        private static Panel GameOver { get; set; }
         private bool gameOver = false;
-        public Panel[] GhostTeamPanel { get; set; }
 
-        public int ElementSize { get; set; }
 
-        public Field Field;
-        public Pacman Pacman;
-        public Pacman PacmanTwo = new Pacman(9,13);
 
-        public GhostTeam GhostTeam;
-
-        public int Score { get; set; }
-        public int Lives { get; set; }
-        public int Steps { get; set; }
-        public int Level { get; set; }
-
-        public List<Energiser> Energisers = new List<Energiser>();
-        public int TimeEnergiserActive { get; set; }
-
-        public int Interval { get; set; }
-        public string PlayerName;
-
-        public int MaxLevel = 5;
         const int MaxLivesValue = 7;
 
         const int MinuteConstVal = 1;
@@ -69,38 +35,20 @@ namespace PacmanGame_WinForms_
         const int OneSecond = 1000;
         const int IntervalConstVal = 100;
 
-        int timeToChange = IntervalConstVal / 2;
-        int timeForRunning = IntervalConstVal * 2 / 5;
+        static int timeToChange = IntervalConstVal / 2;
+        static int timeForRunning = IntervalConstVal * 2 / 5;
 
-        public Game()
-        {
-            StartGame();
-        }
-
-        private void StartGame()
-        {
-            SetParameters();
-            InitializeGameElem();
-            InitializeComponent();
-        }
-
-        protected virtual void SetParameters()
+        protected override void SetParameters()
         {
             Field = new Field(this);
             Interface.game = this;
             BasePoint.game = this;
             Controller.game = this;
             BasePoint.game = this;
-            GhostTeam = new GhostTeam(this);
         }
 
-        public virtual void InitializeGameElem()
+        public override void InitializeGameElem()
         {
-            foreach (var ghost in GhostTeam.List)
-            {
-                Controller.GetInstance().AttachEnergiserObserver(ghost);
-            }
-
             PlusLiveBonus = pliusbonusFactory.GetBonus("Live");
             DoubleCoinBonus = pliusbonusFactory.GetBonus("Double");
             PlusCoinBonus = pliusbonusFactory.GetBonus("Coin");
@@ -220,35 +168,6 @@ namespace PacmanGame_WinForms_
             }
         }
 
-        private void BlinkyMoving(object sender, EventArgs e)
-        {
-            GhostMoving(0);
-        }
-
-        private void ClydeMoving(object sender, EventArgs e)
-        {
-            GhostMoving(3);
-        }
-
-        private void InkyMoving(object sender, EventArgs e)
-        {
-            GhostMoving(2);
-        }
-
-        private void PinkyMoving(object sender, EventArgs e)
-        {
-            GhostMoving(1);
-        }
-
-        void GhostMoving(int index)
-        {
-            GhostTeam[index].Move();
-            GhostTeam[index].ChooseBehaviour();
-            RemoveEnergiser();
-
-            Interface.UpdateEnemy(GhostTeam[index], index);
-        }
-
         private void BonusMoving(object sender, EventArgs e)
         {
             for (int i = 0; i < BonusList.Count; ++i)
@@ -345,40 +264,6 @@ namespace PacmanGame_WinForms_
             BonusList.Add(Surprise);
         }
 
-        protected virtual void SetTimer()
-        {
-            BlinkyTimer = new Timer(components);
-            ClydeTimer = new Timer(components);
-            InkyTimer = new Timer(components);
-            PinkyTimer = new Timer(components);
-            LevelTimer = new Timer(components);
-
-            TimerList.Add(BlinkyTimer);
-            TimerList.Add(ClydeTimer);
-            TimerList.Add(InkyTimer);
-            TimerList.Add(PinkyTimer);
-            TimerList.Add(LevelTimer);
-            TimerList.Add(PacmanTimer);
-            TimerList.Add(StopWatchTimer);
-
-
-            BlinkyTimer.Tick += new EventHandler(BlinkyMoving);
-            ClydeTimer.Tick += new EventHandler(ClydeMoving);
-            InkyTimer.Tick += new EventHandler(InkyMoving);
-            PinkyTimer.Tick += new EventHandler(PinkyMoving);
-            LevelTimer.Tick += new EventHandler(TimerForEachLevel);
-
-            SetTimerSetting();
-
-            PacmanTimer.Interval = Interval;
-            BlinkyTimer.Interval = GhostTeam[0].Interval;
-            ClydeTimer.Interval = GhostTeam[1].Interval;
-            InkyTimer.Interval = GhostTeam[2].Interval;
-            PinkyTimer.Interval = GhostTeam[3].Interval;
-            LevelTimer.Interval = OneSecond;
-
-            EnableEachTimer();
-        }
 
         void EnableEachTimer()
         {
@@ -386,6 +271,26 @@ namespace PacmanGame_WinForms_
             {
                 TimerList[i].Enabled = true;
             }
+        }
+
+
+        protected override void SetTimer()
+        {
+            LevelTimer = new Timer(components);
+
+            TimerList.Add(LevelTimer);
+            TimerList.Add(PacmanTimer);
+            TimerList.Add(StopWatchTimer);
+
+
+            LevelTimer.Tick += new EventHandler(TimerForEachLevel);
+
+            SetTimerSetting();
+
+            PacmanTimer.Interval = Interval;
+            LevelTimer.Interval = OneSecond;
+
+            EnableEachTimer();
         }
 
         void SetTimerSetting()
@@ -488,37 +393,11 @@ namespace PacmanGame_WinForms_
                 }
             }
 
-
-            GhostTeamPanel = new Panel[4];
-
-            for (int i = 0; i < GhostTeamPanel.Length; ++i)
-            {
-                GhostTeamPanel[i] = CreatePanel();
-                Controls.Add(GhostTeamPanel[i]);
-                Interface.UpdateEnemy(GhostTeam[i], i);
-            }
-
             UpdateInfo();
 
             Hero = CreatePanel();
             Hero.BringToFront();
             Interface.UpdateHero();
-        }
-
-        public Panel CreatePanel()
-        {
-            Panel panel = new Panel()
-            {
-                Parent = this,
-                BackgroundImageLayout = ImageLayout.Stretch
-            };
-
-            return panel;
-        }
-
-        public void UpdateInfo()
-        {
-            InfoBlock.Text = $"Level: {Level}\r\nScore: {Score}\r\nSteps: {Steps}\r\nLives: {Lives}\r\nSpent time:\r\n0{spentMinute}:{spentSecond}";
         }
 
         private void TimerForEachLevel(object sender, EventArgs e)
@@ -538,20 +417,7 @@ namespace PacmanGame_WinForms_
                 YouFailed();
             }
 
-            GhostChasingWave();
             CreateBonus();
-            RespaunGhost();
-        }
-
-        void GhostChasingWave()
-        {
-            handler.SetNext(new PinkyHandler()).SetNext(new InkyHandler()).SetNext(new ClydeHandler());
-            
-            for (int i = 0; i < 3; i++)
-            {
-                handler.Handle(GhostTeam[i]);
-            }
-            
         }
 
         void CreateBonus()
@@ -567,22 +433,6 @@ namespace PacmanGame_WinForms_
                     Interface.UpdateBonus(b, b.Panel);
                     BonusTimer.Enabled = true;
                 }
-            }
-        }
-
-        void RespaunGhost()
-        {
-            if (Level == MaxLevel || Level == MaxLevel - 1)
-            {
-                int index = GhostTeam.Respaun();
-
-                if (index == -1)
-                {
-                    return;
-                }
-
-                Controls.Add(GhostTeamPanel[index]);
-                Interface.UpdateEnemy(GhostTeam[index], index);
             }
         }
 

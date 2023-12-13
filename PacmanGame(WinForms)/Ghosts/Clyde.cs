@@ -11,7 +11,7 @@ namespace PacmanGame_WinForms_
         private Direction control = Direction.DOWN;
         private int interval = Settings.Interval;
 
-        private readonly Vector2 targetPoint = new Vector2(1, Controller.GetInstance().MapHeight - 2);
+        private readonly Vector2 targetPoint = new Vector2(1, Controller.game.Field.Rows - 2);
 
 
         public Clyde(ISpeedBehaviour speedBehaviour) : base(speedBehaviour)

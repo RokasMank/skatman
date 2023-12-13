@@ -29,7 +29,7 @@ namespace PacmanGame_WinForms_
 
         public override void GetScore()
         {
-            Game.Score += 50;
+            game.Score += 50;
         }
 
         public bool ReadyToStop(DateTime timeToChange)

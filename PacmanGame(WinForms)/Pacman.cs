@@ -26,7 +26,7 @@ namespace PacmanGame_WinForms_
             if (CheckPoint(nextDirection))
             {
                 GetNextPoint(nextDirection);
-                ++Game.Steps;
+                ++game.Steps;
 
                 Direction = nextDirection;
                 nextDirection = 0;               
@@ -35,7 +35,7 @@ namespace PacmanGame_WinForms_
             if (CheckPoint(Direction) && Direction != nextDirection)
             {
                 GetNextPoint(Direction);
-                ++Game.Steps;              
+                ++game.Steps;              
             }
 
             Controller.GetInstance().PacmanHitGhost(X, Y);
@@ -69,7 +69,7 @@ namespace PacmanGame_WinForms_
                 case Direction.LEFT:
                     if (PortalOpened)
                     {
-                        X = Controller.GetInstance().MapWidth - 1;
+                        X = Controller.game.Field.Columns - 1;
                         PortalOpened = false;
                     }
                     else
@@ -173,7 +173,7 @@ namespace PacmanGame_WinForms_
         {
             if (Controller.GetInstance().PacmanCanMove(y, x))
             {
-                var matrix = Game.Field;
+                var matrix = game.Field;
                 matrix[y, x].Action();
                 Interface.UpdatePanel(matrix[y, x]);
                 return true;

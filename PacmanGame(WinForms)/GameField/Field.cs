@@ -12,6 +12,7 @@ namespace PacmanGame_WinForms_
 { 
     public class Field
     {
+        public static Game game;
         public int Columns { get; set; }
         public int Rows { get; set; }
 
@@ -23,8 +24,9 @@ namespace PacmanGame_WinForms_
         IBuilder _energiserBuilder;
         IBuilder _coinBuilder;
 
-        public Field()
+        public Field(Game _game)
         {
+            game = _game;
             try
             {
                 
@@ -123,7 +125,7 @@ namespace PacmanGame_WinForms_
                             break;
                         case '*':
                             Matrix[i, j] = new EmptyPoint(j, i);
-                            Game.Pacman = new Pacman(j, i);
+                            game.Pacman = new Pacman(j, i);
                             break;
                     }
                 }

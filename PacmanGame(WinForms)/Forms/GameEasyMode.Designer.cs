@@ -1,6 +1,6 @@
 ﻿namespace PacmanGame_WinForms_
 {
-    partial class Game
+    partial class GameEasyMode
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -26,7 +26,7 @@
         /// Требуемый метод для поддержки конструктора — не изменяйте 
         /// содержимое этого метода с помощью редактора кода.
         /// </summary>
-        protected virtual void InitializeComponent()
+        protected override void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
             this.PacmanTimer = new System.Windows.Forms.Timer(this.components);
@@ -142,14 +142,12 @@
         }
 
         private System.Windows.Forms.Timer PacmanTimer;
-        public static System.Windows.Forms.Label InfoBlock = new System.Windows.Forms.Label();
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         //private System.Windows.Forms.Timer TimerGhostHitPacman;
         //private static System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        public System.Windows.Forms.Timer LevelTimer;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Timer StopWatchTimer;
         private System.Windows.Forms.Timer BonusTimer;

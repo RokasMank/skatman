@@ -7,6 +7,7 @@ namespace PacmanGame_WinForms_
 {
     public abstract class BasePoint
     {
+        public static Game game;
         public bool Portal = false;
 
         public BasePoint(int x, int y)

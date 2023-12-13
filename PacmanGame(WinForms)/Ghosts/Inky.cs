@@ -11,7 +11,7 @@ namespace PacmanGame_WinForms_
         private Direction control = Direction.UP;
         private int interval = Settings.Interval + 50;
 
-        private readonly Vector2 targetPoint = new Vector2(Controller.GetInstance().MapWidth - 2, Controller.GetInstance().MapHeight - 2);
+        private readonly Vector2 targetPoint = new Vector2(Controller.game.Field.Columns - 2, Controller.game.Field.Rows - 2);
 
         public Inky(ISpeedBehaviour speedBehaviour) : base(speedBehaviour)
         {

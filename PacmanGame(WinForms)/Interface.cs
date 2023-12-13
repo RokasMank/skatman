@@ -11,7 +11,7 @@ namespace PacmanGame_WinForms_
 {
     class Interface
     {
-        static int ElementSize = Game.ElementSize;
+        public static Game game;
 
         public static void UpdateBonus(Bonus bonus, Panel panel)
         {
@@ -21,9 +21,9 @@ namespace PacmanGame_WinForms_
             }
             else
             {
-                panel.Size = new Size(ElementSize, ElementSize);
-                panel.Location = new Point(bonus.X * ElementSize,
-                            bonus.Y * ElementSize);
+                panel.Size = new Size(game.ElementSize, game.ElementSize);
+                panel.Location = new Point(bonus.X * game.ElementSize,
+                            bonus.Y * game.ElementSize);
                 panel.BringToFront();
                 panel.BackgroundImage = bonus.Image;
             }
@@ -31,10 +31,10 @@ namespace PacmanGame_WinForms_
 
         public static Label SetInfoLabel()
         {            
-            int Level = Game.Level;
-            int Score = Game.Score;
-            int Steps = Game.Steps;
-            int Lives = Game.Lives;
+            int Level = game.Level;
+            int Score = game.Score;
+            int Steps = game.Steps;
+            int Lives = game.Lives;
 
             Label label1 = new Label();
             label1.BackColor = Color.Lime;
@@ -59,23 +59,23 @@ namespace PacmanGame_WinForms_
 
         public static void UpdatePanel(BasePoint element)
         {
-            Panel[,] GameMap = Game.GameMap;
-            Field Field = Game.Field;
+            Panel[,] GameMap = game.GameMap;
+            Field Field = game.Field;
 
             if (element != null)
             {
                 if (element is Coin)
                 {
-                    GameMap[element.Y, element.X].Size = new Size(ElementSize, ElementSize);
-                    GameMap[element.Y, element.X].Location = new Point(element.X * ElementSize,
-                        element.Y * ElementSize);
+                    GameMap[element.Y, element.X].Size = new Size(game.ElementSize, game.ElementSize);
+                    GameMap[element.Y, element.X].Location = new Point(element.X * game.ElementSize,
+                        element.Y * game.ElementSize);
                 }
 
                 else
                 {
-                    GameMap[element.Y, element.X].Size = new Size(ElementSize, ElementSize);
-                    GameMap[element.Y, element.X].Location = new Point(element.X * ElementSize,
-                        element.Y * ElementSize);
+                    GameMap[element.Y, element.X].Size = new Size(game.ElementSize, game.ElementSize);
+                    GameMap[element.Y, element.X].Location = new Point(element.X * game.ElementSize,
+                        element.Y * game.ElementSize);
                 }
 
                 GameMap[element.Y, element.X].BackgroundImage = Field[element.Y, element.X].Image;
@@ -84,8 +84,8 @@ namespace PacmanGame_WinForms_
 
         public static void UpdateEnemy(Ghost element, int i)
         {
-            GhostTeam GhostTeam = Game.GhostTeam;
-            Panel[] GhostTeamPanel = Game.GhostTeamPanel;
+            GhostTeam GhostTeam = game.GhostTeam;
+            Panel[] GhostTeamPanel = game.GhostTeamPanel;
 
             if (GhostTeam[i]._isEmpty)
             {
@@ -93,9 +93,9 @@ namespace PacmanGame_WinForms_
             }
             else
             {
-                GhostTeamPanel[i].Size = new Size(ElementSize, ElementSize);
-                GhostTeamPanel[i].Location = new Point(element.X * ElementSize,
-                            element.Y * ElementSize);
+                GhostTeamPanel[i].Size = new Size(game.ElementSize, game.ElementSize);
+                GhostTeamPanel[i].Location = new Point(element.X * game.ElementSize,
+                            element.Y * game.ElementSize);
                 GhostTeamPanel[i].BringToFront();
                 GhostTeamPanel[i].BackgroundImage = element.Image;
             }
@@ -103,12 +103,12 @@ namespace PacmanGame_WinForms_
 
         public static void UpdateHero()
         {
-            Panel Hero = Game.Hero;
-            Pacman Pacman = Game.Pacman;
+            Panel Hero = game.Hero;
+            Pacman Pacman = game.Pacman;
 
-            Hero.Size = new Size(ElementSize, ElementSize);
-            Hero.Location = new Point(Pacman.X * ElementSize,
-                Pacman.Y * ElementSize);
+            Hero.Size = new Size(game.ElementSize, game.ElementSize);
+            Hero.Location = new Point(Pacman.X * game.ElementSize,
+                Pacman.Y * game.ElementSize);
 
             Hero.BackgroundImage = Pacman.Image;
         }

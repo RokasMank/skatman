@@ -59,8 +59,8 @@ namespace PacmanGame_WinForms_
         }
         protected void SetRandomPos()
         {
-            X = rnd.Next(1, Controller.GetInstance().MapWidth - 2);
-            Y = rnd.Next(1, Controller.GetInstance().MapHeight - 2);
+            X = rnd.Next(1, Controller.game.Field.Columns - 2);
+            Y = rnd.Next(1, Controller.game.Field.Rows - 2);
 
             if (Controller.GetInstance().CheckRndPos(X, Y))
             {
@@ -83,9 +83,9 @@ namespace PacmanGame_WinForms_
         public override void GetScore()
         {
             if (!passive)
-                --Game.Lives;
+                --game.Lives;
             else
-                Game.Score += 100;
+                game.Score += 100;
         }
 
         public override void Action()
@@ -149,10 +149,10 @@ namespace PacmanGame_WinForms_
         {
             if (!passive)
             {
-                Game.ClydeTimer.Interval = Interval;
+                game.ClydeTimer.Interval = Interval;
             }
             else
-                Game.ClydeTimer.Interval = Interval + 20;
+                game.ClydeTimer.Interval = Interval + 20;
         }
 
         public virtual void ChangeImage()
@@ -167,7 +167,7 @@ namespace PacmanGame_WinForms_
                 GetMextDir();
                 GetNextPoint();
 
-                if (!pacmanHit && !Game.Pacman.GhostHit)
+                if (!pacmanHit && !game.Pacman.GhostHit)
                 {
                     PacmanHit();
                     pacmanHit = false;
@@ -188,8 +188,8 @@ namespace PacmanGame_WinForms_
 
         void ShortestPathSearch()
         {
-            int W = Controller.GetInstance().MapWidth;
-            int H = Controller.GetInstance().MapHeight;
+            int W = Controller.game.Field.Columns;
+            int H = Controller.game.Field.Rows;
             var grid = Controller.GetInstance().FillLogicMap();
 
             var finish = setFinishPoint();
@@ -236,8 +236,8 @@ namespace PacmanGame_WinForms_
 
         void ChooseNextStep(int[,] grid, Vector2 finish, int[] dy, int[] dx)
         {
-            int W = Controller.GetInstance().MapWidth;
-            int H = Controller.GetInstance().MapHeight;
+            int W = Controller.game.Field.Columns;
+            int H = Controller.game.Field.Rows;
 
             int[] px = new int[W * H];
             int[] py = new int[W * H];

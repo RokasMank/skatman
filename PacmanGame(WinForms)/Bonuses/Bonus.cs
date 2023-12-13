@@ -73,7 +73,7 @@ namespace PacmanGame_WinForms_
         
         protected void SetRndTimeToAppear()
         {
-            LevelToAppear = rnd.Next(1, Game.MaxLevel);
+            LevelToAppear = rnd.Next(1, game.MaxLevel);
             TimeToAppear = rnd.Next(10, 60);
         }
     }

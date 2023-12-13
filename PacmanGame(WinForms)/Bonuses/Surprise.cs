@@ -35,7 +35,7 @@ namespace PacmanGame_WinForms_
             switch(num % 2)
             {
                 case 1:
-                    Game.countdownSecond /= 2;
+                    game.countdownSecond /= 2;
                     break;
                 case 0:
                     if (num == 2)
