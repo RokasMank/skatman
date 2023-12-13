@@ -229,6 +229,12 @@
     <Compile Include="Decorator\PacLivesDecorator.cs" />
     <Compile Include="Decorator\PacScoreDecorator.cs" />
     <Compile Include="Decorator\PacStepsDecorator.cs" />
+    <Compile Include="Forms\Chat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Chat.Designer.cs">
+      <DependentUpon>Chat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LogInForm.cs">
       <SubType>Form</SubType>
     </Compile>
