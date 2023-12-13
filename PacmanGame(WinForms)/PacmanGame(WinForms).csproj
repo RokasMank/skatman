@@ -280,7 +280,7 @@
     <Compile Include="Iterator\BonusIterator.cs" />
     <Compile Include="Iterator\GhostIterator.cs" />
     <Compile Include="Iterator\IIterator.cs" />
-    <Compile Include="Mediator\GameMediator.cs" />
+    <Compile Include="Mediator\ChatMediator.cs" />
     <Compile Include="Mediator\IColleague.cs" />
     <Compile Include="Mediator\IMenuMediator.cs" />
     <Compile Include="OpenSettings.cs" />

@@ -2,29 +2,48 @@
 using PacmanGame_WinForms_.Forms;
 using PacmanGame_WinForms_.Mediator;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PacmanGame_WinForms_
 {
-    public partial class Menu : Form, IColleague
+    public partial class Menu : Form, IUser
     {
-        private IMenuMediator mediator;
+        IMenuMediator mediator;
+        string clientId;
         HubConnection hubConnection;
         public Menu()
         {
             InitializeComponent();
-            hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:53353/chathub").Build();
-            
-           // mediator = new GameMediator();
-            //mediator.RegisterChatParticipant(this);
+            hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:5335/chathub").Build();
+           
+          
+
+            // Handle the SetClientId message from the server
+            hubConnection.On<string>("SetClientId", id =>
+            {
+                clientId = id;
+                Console.WriteLine($"Client Id set to: {clientId}");
+                mediator = new ChatMediator(hubConnection, clientId);
+            });
+
+
+            hubConnection.On<List<string>>("UserListUpdated", (userList) =>
+            {
+                // Update your UI with the new user list
+                mediator.UpdateUserList(userList);
+            });
+            // mediator = new GameMediator();
+
             hubConnection.Closed += async (error) =>
             {
                 await Task.Delay(new Random().Next(0, 5) * 1000);
                 await hubConnection.StartAsync();
             };
         }
-
+         
         public static void OpenForm(Form form, bool setSettings = false)
         {
             form.ShowDialog();
@@ -72,7 +91,9 @@ namespace PacmanGame_WinForms_
 
         private void chat_Click(object sender, EventArgs e)
         {
-            var form = new Chat(hubConnection);
+            //mediator.RegisterUser(textBox3.Text);
+            var form = new Chat( mediator);
+           
             form.ShowDialog();
         }
         private async void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -109,7 +130,7 @@ namespace PacmanGame_WinForms_
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            var a = new TextBox();
+            var a = new System.Windows.Forms.TextBox();
             switch (keyData)
             {
                 case Keys.Enter:
@@ -150,9 +171,11 @@ namespace PacmanGame_WinForms_
         public void ReceiveMessage(string user, string message)
         {
             var newMessage = $"{user}: {message}";
-            listBox1.Invoke((MethodInvoker)delegate {
-                listBox1.Items.Add(newMessage);
-            });
+  
+                listBox1.Invoke((MethodInvoker)delegate {
+                    listBox1.Items.Add(newMessage);
+                });
+            
         }
         private async void button1_Click(object sender, EventArgs e)
         {
@@ -160,7 +183,7 @@ namespace PacmanGame_WinForms_
             {
                 //await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
                 //mediator.SendMessage(textBox2.Text, textBox1.Text);
-                await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
+              //  await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
             }
             catch (Exception ex)
             {
@@ -188,7 +211,7 @@ namespace PacmanGame_WinForms_
 
         public void SendMessage(string message)
         {
-            throw new NotImplementedException();
+            //mediator.SendMessage(message, this);
         }
     }
 }

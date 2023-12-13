@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PacmanGame_WinForms_.Mediator
 {
-    public interface IColleague
+    public interface IUser
     {
         void ReceiveMessage(string message);
         void SendMessage(string message);

@@ -35,6 +35,7 @@
             this.exit = new System.Windows.Forms.Button();
             this.resultBtn = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -140,6 +141,14 @@
             this.listBox1.TabIndex = 6;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(749, 43);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(132, 22);
+            this.textBox3.TabIndex = 9;
+            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Lime;
@@ -170,12 +179,14 @@
             this.Controls.Add(this.help);
             this.Controls.Add(this.startGame);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox3);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pac-Man";
             this.Load += new System.EventHandler(this.Menu_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -188,6 +199,7 @@
         private System.Windows.Forms.Button exit;
         public System.Windows.Forms.Button resultBtn;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TextBox textBox3;
         public System.Windows.Forms.Button button2;
     }
 }

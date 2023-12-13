@@ -8,8 +8,9 @@ namespace PacmanGame_WinForms_.Mediator
 {
     public interface IMenuMediator
     {
-        void SendMessage(string message, IColleague sender);
-        void RegisterUser(IColleague user);
+        void SendMessage(string message, string sender);
+        // void RegisterUser(string user);
+        void UpdateUserList(List<string> userList);
     }
 
 

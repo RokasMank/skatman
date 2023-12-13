@@ -19,6 +19,7 @@ namespace PacmanGame_WinForms_
         public static Timer InkyTimer;
         public static Timer PinkyTimer;
 
+        AbstractHandler handler = new BlinkyHandler();
         public static int countdownMinute { get; set; }
         public static int countdownSecond { get; set; }
 

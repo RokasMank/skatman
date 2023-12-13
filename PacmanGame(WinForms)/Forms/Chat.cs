@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using PacmanGame_WinForms_.Mediator;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,20 +12,28 @@ using System.Windows.Forms;
 
 namespace PacmanGame_WinForms_.Forms
 {
-    public partial class Chat : Form
+    public partial class Chat : Form, IUser
     {
-        HubConnection hubConnection;
-        public Chat(HubConnection hb)
+        private IMenuMediator mediator;
+        
+     
+        //HubConnection hubConnection;
+        public Chat( IMenuMediator mediator)
         {
             InitializeComponent();
-            hubConnection = hb;
+           
+
+            // hubConnection = hb;
+            this.mediator = mediator;
+            
         }
 
         private async void send_Click(object sender, EventArgs e)
         {
             try
             {
-                await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
+                SendMessage(textBox1.Text);
+               // await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
             }
             catch (Exception ex)
             {
@@ -38,6 +47,16 @@ namespace PacmanGame_WinForms_.Forms
         private void back_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public void ReceiveMessage(string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SendMessage(string message)
+        {
+            mediator.SendMessage(message, textBox2.Text);
         }
     }
 }
