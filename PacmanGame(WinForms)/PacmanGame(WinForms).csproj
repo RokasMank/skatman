@@ -220,6 +220,12 @@
     <Compile Include="Bridge\ISpeedBehaviour.cs" />
     <Compile Include="Bridge\SpeedDown.cs" />
     <Compile Include="Bridge\SpeedUp.cs" />
+    <Compile Include="ChainOfResponsibility\AbstractHandler.cs" />
+    <Compile Include="ChainOfResponsibility\IHandler.cs" />
+    <Compile Include="ChainOfResponsibility\InkyHandler.cs" />
+    <Compile Include="ChainOfResponsibility\BlinkyHandler.cs" />
+    <Compile Include="ChainOfResponsibility\ClydeHandler.cs" />
+    <Compile Include="ChainOfResponsibility\PinkyHandler.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="DataBase.cs" />
     <Compile Include="Decorator\IPacInfo.cs" />

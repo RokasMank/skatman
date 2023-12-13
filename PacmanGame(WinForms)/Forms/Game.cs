@@ -1,4 +1,5 @@
 ﻿using PacmanGame_WinForms_.Bonuses;
+using PacmanGame_WinForms_.ChainOfResponsibility;
 using PacmanGame_WinForms_.Iterator;
 using System;
 using System.Collections.Generic;
@@ -596,45 +597,13 @@ namespace PacmanGame_WinForms_
 
         void GhostChasingWave()
         {
-            Chase chase = new Chase();
-            Run run = new Run();
-
-            if (countdownSecond == timeToChange)
+            handler.SetNext(new PinkyHandler()).SetNext(new InkyHandler()).SetNext(new ClydeHandler());
+            
+            for (int i = 0; i < 3; i++)
             {
-                GhostTeam[0].SetMovement(chase);
-                GhostTeam[0].executeStrategy();
-                GhostTeam[1].SetMovement(chase);
-                GhostTeam[1].executeStrategy();
-                GhostTeam[2].SetMovement(run);
-                GhostTeam[2].executeStrategy();
-                GhostTeam[3].SetMovement(run);
-                GhostTeam[3].executeStrategy();
-
-                timeToChange = timeToChange * 2 / 3;
-
-                if (timeToChange == 1)
-                {
-                    timeToChange = IntervalConstVal / 2;
-                }
+                handler.Handle(GhostTeam[i]);
             }
-            else if (countdownSecond == timeForRunning)
-            {
-                GhostTeam[0].SetMovement(run);
-                GhostTeam[0].executeStrategy();
-                GhostTeam[1].SetMovement(run);
-                GhostTeam[1].executeStrategy();
-                GhostTeam[2].SetMovement(chase);
-                GhostTeam[2].executeStrategy();
-                GhostTeam[3].SetMovement(chase);
-                GhostTeam[3].executeStrategy();
-
-                timeForRunning = timeForRunning * 5 / 8;
-
-                if (timeForRunning == 1)
-                {
-                    timeForRunning = IntervalConstVal * 2 / 5;
-                }
-            }
+            
         }
 
         void CreateBonus()
