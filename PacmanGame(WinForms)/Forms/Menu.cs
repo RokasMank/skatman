@@ -69,6 +69,12 @@ namespace PacmanGame_WinForms_
         {
             new OpenResults().Execute();
         }
+
+        private void chat_Click(object sender, EventArgs e)
+        {
+            var form = new Chat(hubConnection);
+            form.ShowDialog();
+        }
         private async void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
            
@@ -152,6 +158,7 @@ namespace PacmanGame_WinForms_
         {
             try
             {
+                //await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
                 //mediator.SendMessage(textBox2.Text, textBox1.Text);
                 await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
             }
@@ -162,6 +169,16 @@ namespace PacmanGame_WinForms_
                     listBox1.Items.Add(ex.Message);
                 });
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         public void ReceiveMessage(string message)
