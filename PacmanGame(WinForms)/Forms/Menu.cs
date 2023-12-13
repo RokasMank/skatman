@@ -9,6 +9,7 @@ namespace PacmanGame_WinForms_
     public partial class Menu : Form
     {
         HubConnection hubConnection;
+        Game Game;
         public Menu()
         {
             InitializeComponent();
@@ -40,9 +41,11 @@ namespace PacmanGame_WinForms_
 
         private void startGame_MouseUp(object sender, MouseEventArgs e)
         {
-            Game Game = new Game();
+            Game = new Game();
             Game.Show();
-            
+
+
+
         }
 
         private void help_MouseUp(object sender, MouseEventArgs e)
@@ -72,7 +75,7 @@ namespace PacmanGame_WinForms_
         }
         private async void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
         }
         private async void Menu_Load(object sender, EventArgs e)
         {
@@ -139,9 +142,10 @@ namespace PacmanGame_WinForms_
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            Game.GameMessage(sender, e, textBox2.Text);
             try
             {
-                //await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
+                await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
             }
             catch (Exception ex)
             {

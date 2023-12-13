@@ -1,5 +1,6 @@
 ﻿using PacmanGame_WinForms_.Bonuses;
 using PacmanGame_WinForms_.ChainOfResponsibility;
+using PacmanGame_WinForms_.Interpreter;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -45,7 +46,7 @@ namespace PacmanGame_WinForms_
 
         public static Field Field;
         public static Pacman Pacman;
-        public static Pacman PacmanTwo = new Pacman(9,13);
+        public static Pacman PacmanTwo = new Pacman(9, 13);
 
         public static GhostTeam GhostTeam;
 
@@ -109,6 +110,28 @@ namespace PacmanGame_WinForms_
             Controls.Add(InfoBlock);
 
             SetTimer();
+        }
+
+        public void GameMessage(object sender, EventArgs e, string expression)
+        {
+            Expression upExpression = new UpExpression();
+            Expression downExpression = new DownExpression();
+            Expression upDownExpression = new UpDownExpression(upExpression, downExpression);
+            switch (expression)
+            {
+                case "up":
+                    upExpression.Interpret(Pacman);
+                    break;
+
+                case "down":
+                    downExpression.Interpret(Pacman);
+                    break;
+                case "updown":
+                    upDownExpression.Interpret(Pacman);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void GameKeyDown(object sender, KeyEventArgs e)
@@ -532,12 +555,12 @@ namespace PacmanGame_WinForms_
         void GhostChasingWave()
         {
             handler.SetNext(new PinkyHandler()).SetNext(new InkyHandler()).SetNext(new ClydeHandler());
-            
+
             for (int i = 0; i < 3; i++)
             {
                 handler.Handle(GhostTeam[i]);
             }
-            
+
         }
 
         void CreateBonus()
