@@ -11,7 +11,7 @@ namespace PacmanGame_WinForms_
         public bool GhostHit = false;
         public bool PortalOpened = false;
         public Direction Direction = Direction.UP;
-        private Direction nextDirection = 0;
+        public Direction nextDirection = 0;
 
 
         public Pacman(int x, int y) : base(x, y)
@@ -29,19 +29,19 @@ namespace PacmanGame_WinForms_
                 ++Game.Steps;
 
                 Direction = nextDirection;
-                nextDirection = 0;               
+                nextDirection = 0;
             }
 
             if (CheckPoint(Direction) && Direction != nextDirection)
             {
                 GetNextPoint(Direction);
-                ++Game.Steps;              
+                ++Game.Steps;
             }
 
             Controller.GetInstance().PacmanHitGhost(X, Y);
         }
 
-        private void ChangeImage(Direction direction)
+        public void ChangeImage(Direction direction)
         {
             switch (direction)
             {
@@ -60,7 +60,7 @@ namespace PacmanGame_WinForms_
             }
         }
 
-        
+
 
         void GetNextPoint(Direction direction)
         {
@@ -133,15 +133,15 @@ namespace PacmanGame_WinForms_
             ChangeImage(Direction);
         }
 
-        private bool CheckPoint(Direction direction)
+        public bool CheckPoint(Direction direction)
         {
             switch (direction)
             {
                 case Direction.LEFT:
-                    if (CheckPoint(Y, X - 1)) 
+                    if (CheckPoint(Y, X - 1))
                     {
                         ChangeImage(direction);
-                        return true; 
+                        return true;
                     }
                     break;
                 case Direction.RIGHT:
@@ -178,7 +178,7 @@ namespace PacmanGame_WinForms_
                 Interface.UpdatePanel(matrix[y, x]);
                 return true;
             }
-            
+
             return false;
         }
     }
