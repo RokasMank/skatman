@@ -82,8 +82,9 @@ namespace PacmanGame_WinForms_
 
         public override void GetScore()
         {
+            var lives = Game.LevelInfo.GetLives();
             if (!passive)
-                --Game.Lives;
+                Game.LevelInfo.Set(Game.LevelInfo.GetLevel(), --lives);
             else
                 Game.Score += 100;
         }
