@@ -30,7 +30,19 @@ namespace SignalRChat.Hubs
                 return new List<string>(users.Values);
             }
         }
-       
+        public static string GetConnectionId(string clientID)
+        {
+            foreach (var entry in users)
+            {
+                if (entry.Value == clientID)
+                {
+                    return entry.Key; // Return the connection ID associated with the clientId
+                }
+            }
+
+            return null;
+        }
+
 
         public static void RemoveUser(string connectionId)
         {

@@ -15,17 +15,11 @@ namespace PacmanGame_WinForms_.Forms
     public partial class Chat : Form, IUser
     {
         private IMenuMediator mediator;
-        
-     
-        //HubConnection hubConnection;
+       
         public Chat( IMenuMediator mediator)
         {
             InitializeComponent();
-           
-
-            // hubConnection = hb;
             this.mediator = mediator;
-            
         }
 
         private async void send_Click(object sender, EventArgs e)
@@ -33,14 +27,10 @@ namespace PacmanGame_WinForms_.Forms
             try
             {
                 SendMessage(textBox1.Text);
-               // await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
             }
             catch (Exception ex)
             {
-                // Use Invoke to update the UI element on the main UI thread.
-                //listBox1.Invoke((MethodInvoker)delegate {
-                //    listBox1.Items.Add(ex.Message);
-                //});
+               
             }
         }
 

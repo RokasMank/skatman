@@ -9,7 +9,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PacmanGame_WinForms_
 {
-    public partial class Menu : Form, IUser
+    public partial class Menu : Form
     {
         IMenuMediator mediator;
         string clientId;
@@ -19,9 +19,6 @@ namespace PacmanGame_WinForms_
             InitializeComponent();
             hubConnection = new HubConnectionBuilder().WithUrl("http://localhost:5335/chathub").Build();
            
-          
-
-            // Handle the SetClientId message from the server
             hubConnection.On<string>("SetClientId", id =>
             {
                 clientId = id;
@@ -32,10 +29,8 @@ namespace PacmanGame_WinForms_
 
             hubConnection.On<List<string>>("UserListUpdated", (userList) =>
             {
-                // Update your UI with the new user list
                 mediator.UpdateUserList(userList);
             });
-            // mediator = new GameMediator();
 
             hubConnection.Closed += async (error) =>
             {
@@ -91,9 +86,7 @@ namespace PacmanGame_WinForms_
 
         private void chat_Click(object sender, EventArgs e)
         {
-            //mediator.RegisterUser(textBox3.Text);
             var form = new Chat( mediator);
-           
             form.ShowDialog();
         }
         private async void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -162,11 +155,6 @@ namespace PacmanGame_WinForms_
         {
             throw new NotImplementedException();
         }
-        //public void SetMediator(IMeniuMediator mediator)
-        //{
-        //   // chatMediator = mediator;
-        //  //  chatMediator.RegisterChatParticipant(this);
-        //}
 
         public void ReceiveMessage(string user, string message)
         {
@@ -182,8 +170,6 @@ namespace PacmanGame_WinForms_
             try
             {
                 //await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
-                //mediator.SendMessage(textBox2.Text, textBox1.Text);
-              //  await hubConnection.InvokeAsync("SendMessage", textBox2.Text, textBox1.Text);
             }
             catch (Exception ex)
             {
@@ -204,14 +190,5 @@ namespace PacmanGame_WinForms_
 
         }
 
-        public void ReceiveMessage(string message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SendMessage(string message)
-        {
-            //mediator.SendMessage(message, this);
-        }
     }
 }

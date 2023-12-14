@@ -281,7 +281,7 @@
     <Compile Include="Iterator\GhostIterator.cs" />
     <Compile Include="Iterator\IIterator.cs" />
     <Compile Include="Mediator\ChatMediator.cs" />
-    <Compile Include="Mediator\IColleague.cs" />
+    <Compile Include="Mediator\IUser.cs" />
     <Compile Include="Mediator\IMenuMediator.cs" />
     <Compile Include="OpenSettings.cs" />
     <Compile Include="OpenResults.cs" />
@@ -325,7 +325,6 @@
     </Compile>
     <Compile Include="Sounds.cs" />
     <Compile Include="State\ExtraboostState.cs" />
-    <Compile Include="State\HitByGhostState.cs" />
     <Compile Include="State\IPacManState.cs" />
     <Compile Include="State\NormalState.cs" />
     <Compile Include="State\PacmanPauseState.cs" />

@@ -22,22 +22,10 @@ namespace PacmanGame_WinForms_.State
             _pacman = pacman;
             _game = game;
         }
-
-
         public void Move()
         {
-            
             _game.BackColor = Color.Blue;
-
-                isPaused = true;
-   
-            
-        }
-        private void DisplayPauseMessage()
-        {
-            MessageBox.Show("YOU WON!");
-            // You can use a MessageBox or any other UI element to display the message
-            //MessageBox.Show("Game Paused", "Pause", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            isPaused = true;
         }
 
     }

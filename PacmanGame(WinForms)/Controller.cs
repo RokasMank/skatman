@@ -81,7 +81,7 @@ namespace PacmanGame_WinForms_
             return Game.Field[y, x] is Wall || Game.Field[y, x - 1] is Wall && Game.Field[y, x + 1] is Wall;
         }
 
-        public bool PacmanHit(int x, int y)//
+        public bool PacmanHit(int x, int y)
         {
             return x == Game.Pacman.X && y == Game.Pacman.Y && !Game.Pacman.GhostHit;
         }
@@ -146,22 +146,6 @@ namespace PacmanGame_WinForms_
 
         public void PacmanHitGhost(int x, int y)
         {
-            //IIterator<Ghost> iterator = new GhostIterator(Game.GhostTeam);
-
-            //while (iterator.hasNext())
-            //{
-            //    var ghost = iterator.next();
-
-            //    if (ghost.passive && x == ghost.X && y == ghost.Y && !ghost.pacmanHit)
-            //    {
-            //        ghost.pacmanHit = false;
-            //        Game.Pacman.GhostHit = true;
-            //        ghost.Action();
-            //        Interface.UpdateEnemy(ghost, ghost.IndexOf(ghost));
-            //        Game.UpdateInfo();
-            //    }
-
-            //}
             IIterator<Ghost> iterator = new GhostIterator(Game.GhostTeam);
 
             while (iterator.HasNext())
@@ -170,21 +154,16 @@ namespace PacmanGame_WinForms_
 
                 if (ghost.passive && x == ghost.X && y == ghost.Y && !ghost.pacmanHit)
                 {
-                    //Game.Pacman.SetState(new HitByGhostState(Game.Pacman));
                     ghost.pacmanHit = false;
                     Game.Pacman.GhostHit = true;
                     ghost.Action();
                     Interface.UpdateEnemy(ghost, index);
                     Game.UpdateInfo();
                 }
-                //Game.Pacman.SetState(new NormalState(Game.Pacman));
             }
         
     }
-        //   var list = Game.GhostTeam; //iteratorius // per dvi strukturas(lista ir hashmap pvz, netinka list ir masyvas pvz) arba per viena struktura bet dviem skirtingais būdais (nuo didžiausio iki maziausio pvz ir paprastai)
-
-        // for (int i = 0; i < list.List.Count; ++i)
-        // {
+        
         public bool PacmanCanMove(int y, int x)
         {
             if (IndexOutOfRange(y, x))
