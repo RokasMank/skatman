@@ -8,7 +8,7 @@ namespace PacmanGame_WinForms_.Visitor
 {
     internal interface IExportResultsVisitor
     {
-        void ExportGame(GameNormalMode game);
+        void ExportGame(Game game);
         void ExportPoint(BasePoint point);
     }
 }

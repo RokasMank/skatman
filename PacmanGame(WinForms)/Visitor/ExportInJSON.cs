@@ -11,7 +11,7 @@ namespace PacmanGame_WinForms_.Visitor
 {
     internal class ExportInJSON : IExportResultsVisitor
     {
-        public void ExportGame(GameNormalMode game)
+        public void ExportGame(Game game)
         {
             string filePath = "game" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".json";
             using (StreamWriter outputFile = new StreamWriter(filePath, false))

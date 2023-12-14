@@ -10,7 +10,7 @@ namespace PacmanGame_WinForms_.Visitor
 {
     internal class ExportInText: IExportResultsVisitor
     {
-        public void ExportGame(GameNormalMode game)
+        public void ExportGame(Game game)
         {
             string filePath = "game" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt";
             using (StreamWriter outputFile = new StreamWriter(filePath, false))
