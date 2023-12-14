@@ -1,5 +1,6 @@
 ﻿using PacmanGame_WinForms_.Bonuses;
 using PacmanGame_WinForms_.ChainOfResponsibility;
+using PacmanGame_WinForms_.Visitor;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace PacmanGame_WinForms_
 {
-    public partial class Game : Form
+    public partial class Game : Form, IExportable
     {
         public Timer BlinkyTimer;
         public Timer ClydeTimer;
@@ -71,6 +72,7 @@ namespace PacmanGame_WinForms_
 
         int timeToChange = IntervalConstVal / 2;
         int timeForRunning = IntervalConstVal * 2 / 5;
+        private List<IExportable> ExportableElements = new List<IExportable>();
 
         public Game()
         {
@@ -106,6 +108,8 @@ namespace PacmanGame_WinForms_
             PlusCoinBonus = pliusbonusFactory.GetBonus("Coin");
             MinusLiveBonus = minusbonusFactory.GetBonus("Minus");
             Surprise = minusbonusFactory.GetBonus("Surprise");
+            ExportableElements.Add(Pacman);
+            ExportableElements.Add(this);
         }
 
         private void GameLoad(object sender, EventArgs e)
@@ -266,6 +270,11 @@ namespace PacmanGame_WinForms_
 
         private void YouFailed()
         {
+            IExportResultsVisitor visitor = new ExportInJSON();
+            foreach (var e in ExportableElements)
+            {
+                e.Accept(visitor);
+            }
             RemoveEachTimer();
             ClearForm();
 
@@ -596,6 +605,11 @@ namespace PacmanGame_WinForms_
             }
 
             UpdateInfo();
+        }
+
+        void IExportable.Accept(IExportResultsVisitor visitor)
+        {
+            visitor.ExportGame(this);
         }
     }
 }

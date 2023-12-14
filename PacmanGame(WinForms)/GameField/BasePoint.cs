@@ -1,11 +1,12 @@
-﻿using System;
+﻿using PacmanGame_WinForms_.Visitor;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
 namespace PacmanGame_WinForms_
 {
-    public abstract class BasePoint
+    public abstract class BasePoint : IExportable
     {
         public static Game game;
         public bool Portal = false;
@@ -32,6 +33,11 @@ namespace PacmanGame_WinForms_
         public virtual void Action()
         {
             GetScore();        
+        }
+
+        void IExportable.Accept(IExportResultsVisitor visitor)
+        {
+            visitor.ExportPoint(this);
         }
     }
 }
