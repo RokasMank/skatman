@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PacmanGame_WinForms_.Visitor
 {
-    internal interface IExportable
+    public interface IExportable
     {
         void Accept(IExportResultsVisitor visitor);
     }

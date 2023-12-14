@@ -9,7 +9,6 @@ namespace PacmanGame_WinForms_
     public partial class GameEasyMode : Game
     {
 
-        static List<Timer> TimerList = new List<Timer>();
 
         private static BonusFactory minusbonusFactory = FactoryProducer.getFactory(true);
         private static BonusFactory pliusbonusFactory = FactoryProducer.getFactory(false);
@@ -29,8 +28,8 @@ namespace PacmanGame_WinForms_
 
         const int MaxLivesValue = 7;
 
-        const int MinuteConstVal = 1;
-        const int SecondConstVal = 30;
+        protected override int MinuteConstVal => 1;
+        protected override int SecondConstVal => 5;
         const int TimeEnergActConstVal = 3000;
         const int OneSecond = 1000;
         const int IntervalConstVal = 100;
@@ -49,11 +48,14 @@ namespace PacmanGame_WinForms_
 
         public override void InitializeGameElem()
         {
+            SetParameters();
             PlusLiveBonus = pliusbonusFactory.GetBonus("Live");
             DoubleCoinBonus = pliusbonusFactory.GetBonus("Double");
             PlusCoinBonus = pliusbonusFactory.GetBonus("Coin");
             MinusLiveBonus = minusbonusFactory.GetBonus("Minus");
             Surprise = minusbonusFactory.GetBonus("Surprise");
+            ExportableElements.Add(Pacman);
+            ExportableElements.Add(this);
         }
 
         private void GameLoad(object sender, EventArgs e)
@@ -183,39 +185,34 @@ namespace PacmanGame_WinForms_
             }
         }
 
-        private void YouFailed()
-        {
-            RemoveEachTimer();
-            ClearForm();
+        //private void YouFailed()
+        //{
+        //    RemoveEachTimer();
+        //    ClearForm();
 
-            gameOver = true;
+        //    gameOver = true;
 
-            BackColor = Color.Red;
-            GameOver = new Panel()
-            {
-                Parent = this,
-                Size = new Size(Width, Height),
-                BackgroundImage = Properties.Resources.GameOver
-            };
+        //    BackColor = Color.Red;
+        //    GameOver = new Panel()
+        //    {
+        //        Parent = this,
+        //        Size = new Size(Width, Height),
+        //        BackgroundImage = Properties.Resources.GameOver
+        //    };
 
-            if (PlayerName != null)
-                MessageBox.Show($"{PlayerName},\r\nYOU FAILED!");
-            else
-                MessageBox.Show("YOU FAILED!");
+        //    if (PlayerName != null)
+        //        MessageBox.Show($"{PlayerName},\r\nYOU FAILED!");
+        //    else
+        //        MessageBox.Show("YOU FAILED!");
 
-            Controller.GetInstance().SaveResult("failed");
-        }
+        //    Controller.GetInstance().SaveResult("failed");
+        //}
 
-        private void ClearForm()
+        protected override void ClearForm()
         {
             Hero.Dispose();
 
             foreach (Panel p in GameMap)
-            {
-                p.Dispose();
-            }
-
-            foreach (Panel p in GhostTeamPanel)
             {
                 p.Dispose();
             }
@@ -360,7 +357,6 @@ namespace PacmanGame_WinForms_
             {
                 TimerList[i].Enabled = false;
             }
-            BonusTimer.Stop();
         }
 
         void RemoveEnergiser()

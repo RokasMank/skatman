@@ -19,7 +19,7 @@ namespace PacmanGame_WinForms_
         public int countdownMinute { get; set; }
         public int countdownSecond { get; set; }
 
-        List<Timer> TimerList = new List<Timer>();
+        protected List<Timer> TimerList = new List<Timer>();
 
         public int spentMinute { get; set; }
         public int spentSecond { get; set; }
@@ -64,15 +64,18 @@ namespace PacmanGame_WinForms_
         public int MaxLevel = 5;
         const int MaxLivesValue = 7;
 
-        const int MinuteConstVal = 1;
-        const int SecondConstVal = 30;
+        protected virtual int MinuteConstVal => 1;
+        protected virtual int SecondConstVal => 30;
+
+
         const int TimeEnergActConstVal = 3000;
         const int OneSecond = 1000;
         const int IntervalConstVal = 100;
 
         int timeToChange = IntervalConstVal / 2;
         int timeForRunning = IntervalConstVal * 2 / 5;
-        private List<IExportable> ExportableElements = new List<IExportable>();
+        protected List<IExportable> ExportableElements = new List<IExportable>();
+        bool levelLoaded = false;
 
         public Game()
         {
@@ -81,9 +84,9 @@ namespace PacmanGame_WinForms_
 
         private void StartGame()
         {
-            SetParameters();
             InitializeGameElem();
             InitializeComponent();
+            levelLoaded = true;
         }
 
         protected virtual void SetParameters()
@@ -98,6 +101,7 @@ namespace PacmanGame_WinForms_
 
         public virtual void InitializeGameElem()
         {
+            SetParameters();
             foreach (var ghost in GhostTeam.List)
             {
                 Controller.GetInstance().AttachEnergiserObserver(ghost);
@@ -193,6 +197,7 @@ namespace PacmanGame_WinForms_
             SetGameField();
 
             SetTimerSetting();
+            levelLoaded = true;
         }
 
         private void PacmanMoving(object sender, EventArgs e)
@@ -206,6 +211,7 @@ namespace PacmanGame_WinForms_
 
             if (Field.Finish())
             {
+                levelLoaded = false;
                 if (Level != MaxLevel)
                 {
                     ClearForm();
@@ -268,7 +274,7 @@ namespace PacmanGame_WinForms_
             }
         }
 
-        private void YouFailed()
+        protected void YouFailed()
         {
             IExportResultsVisitor visitor = new ExportInJSON();
             foreach (var e in ExportableElements)
@@ -296,7 +302,7 @@ namespace PacmanGame_WinForms_
             Controller.GetInstance().SaveResult("failed");
         }
 
-        private void ClearForm()
+        protected virtual void ClearForm()
         {
             Hero.Dispose();
 
@@ -464,7 +470,8 @@ namespace PacmanGame_WinForms_
             {
                 TimerList[i].Enabled = false;
             }
-            BonusTimer.Stop();
+            if (BonusTimer != null)
+                BonusTimer.Stop();
         }
 
         void RemoveEnergiser()

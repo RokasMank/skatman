@@ -42,7 +42,13 @@ namespace PacmanGame_WinForms_
         {
             Game Game = new Game();
             Game.Show();
-            
+
+        }
+        private void startEasyGame_MouseUp(object sender, MouseEventArgs e)
+        {
+            Game Game = new GameEasyMode();
+            Game.Show();
+
         }
 
         private void help_MouseUp(object sender, MouseEventArgs e)
