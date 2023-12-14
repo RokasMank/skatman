@@ -10,7 +10,7 @@ namespace PacmanGame_WinForms_.Visitor
 {
     internal class ExportInCSV : IExportResultsVisitor
     {
-        public void ExportGame(Game game)
+        public void ExportGame(GameNormalMode game)
         {
             string filePath = "game" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".csv";
             using (StreamWriter outputFile = new StreamWriter(filePath, false))
