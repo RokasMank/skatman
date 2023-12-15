@@ -1,5 +1,6 @@
 ﻿using PacmanGame_WinForms_.Bonuses;
 using PacmanGame_WinForms_.ChainOfResponsibility;
+using PacmanGame_WinForms_.Memento;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -45,14 +46,14 @@ namespace PacmanGame_WinForms_
 
         public static Field Field;
         public static Pacman Pacman;
-        public static Pacman PacmanTwo = new Pacman(9,13);
 
         public static GhostTeam GhostTeam;
 
+        public static LevelInfo LevelInfo = new LevelInfo();
+        public Level Level = new Level();
+
         public static int Score { get; set; }
-        public static int Lives { get; set; }
         public static int Steps { get; set; }
-        public static int Level { get; set; }
 
         public static List<Energiser> Energisers = new List<Energiser>();
         public static int TimeEnergiserActive { get; set; }
@@ -61,16 +62,13 @@ namespace PacmanGame_WinForms_
         public static string PlayerName;
 
         public const int MaxLevel = 5;
-        const int MaxLivesValue = 7;
+        const int MaxLivesValue = 65;
 
         const int MinuteConstVal = 1;
         const int SecondConstVal = 30;
         const int TimeEnergActConstVal = 3000;
         const int OneSecond = 1000;
         const int IntervalConstVal = 100;
-
-        static int timeToChange = IntervalConstVal / 2;
-        static int timeForRunning = IntervalConstVal * 2 / 5;
 
         public Game()
         {
@@ -118,13 +116,12 @@ namespace PacmanGame_WinForms_
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
             {
                 Pacman.ChangeDirection(e);
-                PacmanTwo.ChangeDirection(e);
 
             }
 
             else if (e.KeyCode == Keys.F5)
             {
-                if (Field.Finish() && Level == MaxLevel)
+                if (Field.Finish() && LevelInfo.GetLevel() == MaxLevel)
                 {
                     YouWin.Dispose();
                 }
@@ -170,17 +167,27 @@ namespace PacmanGame_WinForms_
 
         private void NextLevel()
         {
+            var level = LevelInfo.GetLevel();
+            LevelInfo.Set(level, LevelInfo.GetLives());
+            Level.Next(LevelInfo);
             InitializeGameElem();
-            Level += 1;
+
             SetGameField();
 
             SetTimerSetting();
         }
+        private void PreviousLevel()
+        {
+            Level.Previous();
+            InitializeGameElem();
 
+            SetGameField();
+
+            SetTimerSetting();
+        }
         private void PacmanMoving(object sender, EventArgs e)
         {
             Pacman.Move();
-            PacmanTwo.Move();
             //PacmanEatBonus();
 
             Interface.UpdateHero();
@@ -188,7 +195,7 @@ namespace PacmanGame_WinForms_
 
             if (Field.Finish())
             {
-                if (Level != MaxLevel)
+                if (LevelInfo.GetLevel() != MaxLevel)
                 {
                     ClearForm();
                     NextLevel();
@@ -199,10 +206,18 @@ namespace PacmanGame_WinForms_
                     YouWon();
                 }
             }
-
-            else if (Lives <= 0)
+            else if (LevelInfo.GetLives() <= 0)
             {
-                YouFailed();
+                try
+                {
+                    ClearForm();
+                    PreviousLevel();
+                }
+                catch (Exception ex)
+                {
+                    YouFailed();
+                }
+               
             }
         }
 
@@ -316,8 +331,7 @@ namespace PacmanGame_WinForms_
 
         void SetPacmanParams()
         {
-            Level = 1;
-            Lives = MaxLivesValue;
+            LevelInfo.Set(1, MaxLivesValue);
             Score = 0;
             Steps = 0;
         }
@@ -376,7 +390,7 @@ namespace PacmanGame_WinForms_
 
         void SetTimerSetting()
         {
-            if (Level == 1)
+            if (Game.LevelInfo.GetLevel() == 1)
             {
                 spentMinute = 0;
                 spentSecond = 0;
@@ -504,7 +518,7 @@ namespace PacmanGame_WinForms_
 
         public static void UpdateInfo()
         {
-            InfoBlock.Text = $"Level: {Level}\r\nScore: {Score}\r\nSteps: {Steps}\r\nLives: {Lives}\r\nSpent time:\r\n0{spentMinute}:{spentSecond}";
+            InfoBlock.Text = $"Level: {LevelInfo.GetLevel()}\r\nScore: {Score}\r\nSteps: {Steps}\r\nLives: {LevelInfo.GetLives()}\r\nSpent time:\r\n0{spentMinute}:{spentSecond}";
         }
 
         private void TimerForEachLevel(object sender, EventArgs e)
@@ -544,7 +558,7 @@ namespace PacmanGame_WinForms_
         {
             foreach (Bonus b in BonusList)
             {
-                if (Level == b.LevelToAppear && countdownSecond == b.TimeToAppear)
+                if (Game.LevelInfo.GetLevel() == b.LevelToAppear && countdownSecond == b.TimeToAppear)
                 {
                     b.MakeActive();
                     b.Panel.Parent = this;
@@ -558,7 +572,7 @@ namespace PacmanGame_WinForms_
 
         void RespaunGhost()
         {
-            if (Level == MaxLevel || Level == MaxLevel - 1)
+            if (LevelInfo.GetLevel() == MaxLevel || (LevelInfo.GetLevel() == MaxLevel - 1))
             {
                 int index = GhostTeam.Respaun();
 

@@ -31,10 +31,10 @@ namespace PacmanGame_WinForms_
 
         public static Label SetInfoLabel()
         {            
-            int Level = Game.Level;
+            int Level = Game.LevelInfo.GetLevel();
             int Score = Game.Score;
             int Steps = Game.Steps;
-            int Lives = Game.Lives;
+            int Lives = Game.LevelInfo.GetLives();
 
             Label label1 = new Label();
             label1.BackColor = Color.Lime;

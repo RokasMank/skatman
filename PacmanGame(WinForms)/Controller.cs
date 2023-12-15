@@ -139,7 +139,8 @@ namespace PacmanGame_WinForms_
 
         public void MinusLife()
         {
-            Game.Lives -= 1;
+            var lifes = Game.LevelInfo.GetLives();
+            Game.LevelInfo.Set(Game.LevelInfo.GetLevel(), --lifes);
         }
 
         public void PacmanHitGhost(int x, int y)
@@ -219,7 +220,8 @@ namespace PacmanGame_WinForms_
 
         public void ExtraLife()
         {
-            Game.Lives += 1;
+            var lifes = Game.LevelInfo.GetLives();
+            Game.LevelInfo.Set(Game.LevelInfo.GetLevel(), ++lifes);
         }
 
         public void DoubleScore()
@@ -257,7 +259,7 @@ namespace PacmanGame_WinForms_
             var user = LogInForm.User;
             var score = Game.Score;
             var state = st;
-            var level = Game.Level;
+            var level = Game.LevelInfo.GetLevel();
             var steps = Game.Steps;
 
             string totalTime;

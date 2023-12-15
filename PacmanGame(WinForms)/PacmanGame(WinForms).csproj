@@ -277,6 +277,10 @@
     <Compile Include="Ghosts\GhostTeam.cs" />
     <Compile Include="Ghosts\Inky.cs" />
     <Compile Include="GameField\SourceFile.cs" />
+    <Compile Include="LevelInfo.cs" />
+    <Compile Include="Memento\IMemento.cs" />
+    <Compile Include="Memento\Level.cs" />
+    <Compile Include="Memento\Memento.cs" />
     <Compile Include="OpenSettings.cs" />
     <Compile Include="OpenResults.cs" />
     <Compile Include="ExitApp.cs" />
